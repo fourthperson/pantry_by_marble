@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/AGaramondPro-Bold.otf",
+      "sha1": "8fbe31a4a3bcabea094858800f94c70df6303eaa"
+    },
+    {
+      "path": "assets/fonts/AGaramondPro-Regular.otf",
+      "sha1": "211723d7471e07a637d844318f0c9ae61cce236d"
+    }
+  ]
+}
