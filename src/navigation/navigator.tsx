@@ -3,9 +3,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from '../screens/splash/Splash.tsx';
+import RegisterScreen from '../screens/register/Register.tsx';
 
 export const routeSplash = 'splash';
-export const routeHome = 'home';
+export const routeRegister = 'register';
 export const routeCart = 'cart';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,9 @@ function PantryAppNavigator(): React.JSX.Element {
                 <Stack.Screen
                     name={routeSplash}
                     component={SplashScreen}/>
+                <Stack.Screen
+                    name={routeRegister}
+                    component={RegisterScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
