@@ -12,8 +12,8 @@
 		6F8D1A376158CE14AADAD80C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		602C046DE252471B930D992A /* AGaramondPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62826B040E52400592287681 /* AGaramondPro-Bold.otf */; };
-		5A74AFBE26A24BF6BB6A35E5 /* AGaramondPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9B16E7B128F405AA55427EF /* AGaramondPro-Regular.otf */; };
+		E700036F9F9242C7A40B133D /* AGaramondPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D0653DDA29B4DFBBE3C8E6B /* AGaramondPro-Bold.otf */; };
+		2939A5118478478A843937AE /* AGaramondPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 80CC0646421F4B09A1AA7356 /* AGaramondPro-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = pantry_by_marble/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pantry_by_marble/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		62826B040E52400592287681 /* AGaramondPro-Bold.otf */ = {isa = PBXFileReference; name = "AGaramondPro-Bold.otf"; path = "../assets/fonts/AGaramondPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E9B16E7B128F405AA55427EF /* AGaramondPro-Regular.otf */ = {isa = PBXFileReference; name = "AGaramondPro-Regular.otf"; path = "../assets/fonts/AGaramondPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6D0653DDA29B4DFBBE3C8E6B /* AGaramondPro-Bold.otf */ = {isa = PBXFileReference; name = "AGaramondPro-Bold.otf"; path = "../assets/fonts/AGaramondPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		80CC0646421F4B09A1AA7356 /* AGaramondPro-Regular.otf */ = {isa = PBXFileReference; name = "AGaramondPro-Regular.otf"; path = "../assets/fonts/AGaramondPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +106,8 @@
 		C7AF5864324A4218A6AA9EEB /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				62826B040E52400592287681 /* AGaramondPro-Bold.otf */,
-				E9B16E7B128F405AA55427EF /* AGaramondPro-Regular.otf */,
+				6D0653DDA29B4DFBBE3C8E6B /* AGaramondPro-Bold.otf */,
+				80CC0646421F4B09A1AA7356 /* AGaramondPro-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -176,8 +176,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6F8D1A376158CE14AADAD80C /* PrivacyInfo.xcprivacy in Resources */,
-				602C046DE252471B930D992A /* AGaramondPro-Bold.otf in Resources */,
-				5A74AFBE26A24BF6BB6A35E5 /* AGaramondPro-Regular.otf in Resources */,
+				E700036F9F9242C7A40B133D /* AGaramondPro-Bold.otf in Resources */,
+				2939A5118478478A843937AE /* AGaramondPro-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
