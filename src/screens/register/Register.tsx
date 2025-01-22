@@ -17,7 +17,9 @@ import PantryTextInput from '../../components/PantryTextInput.tsx';
 import PantryButton from '../../components/PantryButton.tsx';
 import PantrySpacer from '../../components/PantrySpacer.tsx';
 import PantryBackButton from '../../components/PantryBackButton.tsx';
-import PantryBar from "../../components/PantryBar.tsx";
+import PantryBar from '../../components/PantryBar.tsx';
+import {useNavigation} from '@react-navigation/native';
+import {routeProducts} from '../../navigation/navigator.tsx';
 
 function RegisterScreen(): React.JSX.Element {
     const [fullName, setFullname] = useState('');
@@ -25,7 +27,14 @@ function RegisterScreen(): React.JSX.Element {
     const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigation = useNavigation();
+
+    function products() {
+        navigation.push(routeProducts);
+    }
+
     function validateInput() {
+        // todo vlidate input
     }
 
     return (
@@ -92,7 +101,7 @@ function RegisterScreen(): React.JSX.Element {
                         <PantrySpacer horizontal={false} space={20}/>
                         <PantryButton
                             label={'Explore our app'}
-                            onPress={validateInput}/>
+                            onPress={products}/>
                         <PantrySpacer horizontal={false} space={20}/>
                         <Text>
                             <Text style={styles.termsText}>By signing up you agree to our </Text>
