@@ -13,14 +13,14 @@ import {
     sansBold,
     sansRegular,
     serifBold,
-} from '../../config/theme.ts';
-import PantryBackButton from '../../components/PantryBackButton.tsx';
+} from '../../../config/theme.ts';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import PantrySpacer from '../../components/PantrySpacer.tsx';
-import PantryBar from '../../components/PantryBar.tsx';
-import PantryProductItem from '../../components/PantryProductItem.tsx';
-import {PantryProduct} from '../../types/PantryProduct.ts';
+import {PantryProduct} from '../../../types/PantryProduct.ts';
+import PantryBackButton from '../../../components/PantryBackButton.tsx';
+import PantrySpacer from '../../../components/PantrySpacer.tsx';
+import PantryBar from '../../../components/PantryBar.tsx';
+import PantryProductItem from '../../../components/PantryProductItem.tsx';
 
 function ProductsListing(): React.JSX.Element {
     const navigation = useNavigation();
@@ -82,7 +82,6 @@ function ProductsListing(): React.JSX.Element {
             products[i] = product;
         }
         setProductList(products);
-        console.table(products);
     }
 
     return (

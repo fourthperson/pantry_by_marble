@@ -19,7 +19,7 @@ import PantrySpacer from '../../components/PantrySpacer.tsx';
 import PantryBackButton from '../../components/PantryBackButton.tsx';
 import PantryBar from '../../components/PantryBar.tsx';
 import {useNavigation} from '@react-navigation/native';
-import {routeProducts} from '../../navigation/navigator.tsx';
+import {routeHome} from '../../navigation/navigator.tsx';
 
 function RegisterScreen(): React.JSX.Element {
     const [fullName, setFullname] = useState('');
@@ -30,7 +30,7 @@ function RegisterScreen(): React.JSX.Element {
     const navigation = useNavigation();
 
     function products() {
-        navigation.push(routeProducts);
+        navigation.push(routeHome);
     }
 
     function validateInput() {
