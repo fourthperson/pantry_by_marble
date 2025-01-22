@@ -1,8 +1,23 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
-import {baseStyle, primaryColor, sansRegular, serifBold, serifItalic, serifRegular} from '../../config/theme.ts';
-import Icon from 'react-native-vector-icons/Feather';
+import {
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
+import {
+    baseStyle,
+    primaryColor,
+    sansBold,
+    sansRegular,
+    serifBold,
+} from '../../config/theme.ts';
 import PantryTextInput from '../../components/PantryTextInput.tsx';
+import PantryButton from '../../components/PantryButton.tsx';
+import PantrySpacer from '../../components/PantrySpacer.tsx';
+import PantryBackButton from '../../components/PantryBackButton.tsx';
+import PantryBar from "../../components/PantryBar.tsx";
 
 function RegisterScreen(): React.JSX.Element {
     const [fullName, setFullname] = useState('');
@@ -10,13 +25,17 @@ function RegisterScreen(): React.JSX.Element {
     const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
 
+    function validateInput() {
+    }
+
     return (
         <View style={baseStyle.bgContainer}>
             <SafeAreaView style={styles.container}>
                 <ScrollView>
                     <View style={styles.topGroup}>
                         <View style={styles.backArrowBar}>
-                            <Icon name="chevron-left" size={20} color={primaryColor}/>
+                            <PantryBackButton label={''} onPress={() => {
+                            }}/>
                         </View>
                         <View style={styles.exploreBar}>
                             <Text style={styles.exploreText}>
@@ -29,18 +48,20 @@ function RegisterScreen(): React.JSX.Element {
                         <Text style={styles.rationaleText}>
                             Sign up for easy payment, collection{'\n'}and much more
                         </Text>
-                        <View style={styles.greenBar}/>
-                        <View style={{height: 75}}/>
+                        <PantryBar/>
+                        <PantrySpacer space={75} horizontal={false}/>
                         <PantryTextInput
                             label={'Full Name'}
                             value={fullName}
                             onTextChanged={setFullname}
-                            keyboardType={'default'}/>
+                            keyboardType={'default'}
+                            isPasswordField={false}/>
                         <PantryTextInput
                             label={'Email'}
                             value={emailAddress}
                             onTextChanged={setEmailAddress}
-                            keyboardType={'email-address'}/>
+                            keyboardType={'email-address'}
+                            isPasswordField={false}/>
                         <PantryTextInput
                             label={'Mobile Number'}
                             value={mobileNumber}
@@ -49,10 +70,37 @@ function RegisterScreen(): React.JSX.Element {
                             isPasswordField={false}/>
                         <PantryTextInput
                             label={'Password'}
-                            value={mobileNumber}
-                            onTextChanged={setMobileNumber}
+                            value={password}
+                            onTextChanged={setPassword}
                             keyboardType={'default'}
                             isPasswordField={true}/>
+                        <PantryButton
+                            label={'Sign up'}
+                            onPress={validateInput}/>
+                        <PantrySpacer horizontal={false} space={20}/>
+                        <View style={styles.loginRow}>
+                            <Text style={styles.loginQuestion}>Have an account?</Text>
+                            <PantrySpacer space={5} horizontal={true}/>
+                            <Text style={styles.loginText}>Log In</Text>
+                        </View>
+                        <PantrySpacer horizontal={false} space={20}/>
+                        <View style={styles.orRow}>
+                            <View style={styles.divider}/>
+                            <Text style={styles.orText}>or</Text>
+                            <View style={styles.divider}/>
+                        </View>
+                        <PantrySpacer horizontal={false} space={20}/>
+                        <PantryButton
+                            label={'Explore our app'}
+                            onPress={validateInput}/>
+                        <PantrySpacer horizontal={false} space={20}/>
+                        <Text>
+                            <Text style={styles.termsText}>By signing up you agree to our </Text>
+                            <Text style={styles.termsLink}>Terms, Data Policy</Text>
+                            <Text style={styles.termsText}> and </Text>
+                            <Text style={styles.termsLink}>Cookies Policy</Text>
+                        </Text>
+                        <PantrySpacer horizontal={false} space={20}/>
                     </View>
                 </ScrollView>
             </SafeAreaView>
@@ -96,11 +144,50 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
     },
-    greenBar: {
-        height: 15,
+    loginRow: {
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    loginQuestion: {
+        fontFamily: sansRegular,
+        color: primaryColor,
+        fontSize: 14,
+    },
+    loginText: {
+        fontFamily: sansBold,
+        color: primaryColor,
+        fontSize: 14,
+    },
+    termsText: {
+        color: primaryColor,
+        fontFamily: sansRegular,
+        fontSize: 12,
+        lineHeight: 16,
+    },
+    termsLink: {
+        color: primaryColor,
+        fontFamily: serifBold,
+        fontSize: 12,
+        lineHeight: 16,
+    },
+    orRow: {
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    divider: {
         backgroundColor: primaryColor,
-        width: '100%',
-        marginTop: 10,
+        height: 1,
+        flex: 1,
+        alignSelf: 'center',
+    },
+    orText: {
+        marginStart: 20,
+        marginEnd: 20,
+        fontFamily: sansRegular,
+        fontSize: 14,
+        color: primaryColor,
     },
 });
 

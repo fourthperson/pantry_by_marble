@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 // colors
 export const bgColor = '#FCF9F5';
@@ -10,6 +10,7 @@ export const serifBold = 'Adobe Garamond Pro Bold';
 export const serifItalic = 'Adobe Garamond Pro Italic';
 export const sansRegular = 'Avenir Roman';
 export const sansItalic = 'Avenir Oblique';
+// todo check bold font not working
 export const sansBold = 'Avenir Black';
 
 
