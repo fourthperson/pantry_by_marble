@@ -5,7 +5,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import PantryTextInput from '../../components/PantryTextInput.tsx';
 
 function RegisterScreen(): React.JSX.Element {
-    const [fullName, setFullname] = useState('John Doe');
+    const [fullName, setFullname] = useState('');
+    const [emailAddress, setEmailAddress] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <View style={baseStyle.bgContainer}>
@@ -16,17 +19,40 @@ function RegisterScreen(): React.JSX.Element {
                             <Icon name="chevron-left" size={20} color={primaryColor}/>
                         </View>
                         <View style={styles.exploreBar}>
-                            <Text style={styles.exploreText}>Explore app</Text>
+                            <Text style={styles.exploreText}>
+                                Explore app
+                            </Text>
                         </View>
-                        <Text style={styles.welcomeText}>Welcome to{'\n'}Pantry by Marble</Text>
-                        <Text style={styles.rationaleText}>Sign up for easy payment, collection{'\n'}and much
-                            more</Text>
+                        <Text style={styles.welcomeText}>
+                            Welcome to{'\n'}Pantry by Marble
+                        </Text>
+                        <Text style={styles.rationaleText}>
+                            Sign up for easy payment, collection{'\n'}and much more
+                        </Text>
                         <View style={styles.greenBar}/>
-                        <View style={{height: 50}}/>
+                        <View style={{height: 75}}/>
                         <PantryTextInput
                             label={'Full Name'}
                             value={fullName}
-                            onTextChanged={setFullname}/>
+                            onTextChanged={setFullname}
+                            keyboardType={'default'}/>
+                        <PantryTextInput
+                            label={'Email'}
+                            value={emailAddress}
+                            onTextChanged={setEmailAddress}
+                            keyboardType={'email-address'}/>
+                        <PantryTextInput
+                            label={'Mobile Number'}
+                            value={mobileNumber}
+                            onTextChanged={setMobileNumber}
+                            keyboardType={'phone-pad'}
+                            isPasswordField={false}/>
+                        <PantryTextInput
+                            label={'Password'}
+                            value={mobileNumber}
+                            onTextChanged={setMobileNumber}
+                            keyboardType={'default'}
+                            isPasswordField={true}/>
                     </View>
                 </ScrollView>
             </SafeAreaView>
