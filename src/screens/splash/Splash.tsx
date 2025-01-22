@@ -10,7 +10,7 @@ function SplashScreen(): React.JSX.Element {
     useEffect(() => {
         setTimeout(()=> {
             navigation.replace(routeRegister);
-        }, 1500);
+        }, 2000);
     });
 
     return (

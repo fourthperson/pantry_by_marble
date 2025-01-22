@@ -6,8 +6,24 @@
       "sha1": "8fbe31a4a3bcabea094858800f94c70df6303eaa"
     },
     {
+      "path": "assets/fonts/AGaramondPro-Italic.otf",
+      "sha1": "20e900a564ec2ae4528535fd59a28c2a07ec2ae2"
+    },
+    {
       "path": "assets/fonts/AGaramondPro-Regular.otf",
       "sha1": "211723d7471e07a637d844318f0c9ae61cce236d"
+    },
+    {
+      "path": "assets/fonts/Avenir-Black.ttf",
+      "sha1": "8785410d05803e43992bc9d0b44cbaabaa72ef9b"
+    },
+    {
+      "path": "assets/fonts/Avenir-Oblique.ttf",
+      "sha1": "1d6e24bdacb160df49f47d91b160ed8f3b64d60f"
+    },
+    {
+      "path": "assets/fonts/Avenir-Roman.ttf",
+      "sha1": "758723a68b2480466c95a1e090f5be8eafbd5817"
     }
   ]
 }
