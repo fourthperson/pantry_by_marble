@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {
-    SafeAreaView,
     ScrollView,
     StyleSheet,
     Text,
     View,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
     baseStyle,
     primaryColor,
@@ -35,6 +35,9 @@ function RegisterScreen(): React.JSX.Element {
 
     function validateInput() {
         // todo vlidate input
+        if (fullName === '') {
+            return;
+        }
     }
 
     return (
@@ -103,7 +106,7 @@ function RegisterScreen(): React.JSX.Element {
                             label={'Explore our app'}
                             onPress={products}/>
                         <PantrySpacer horizontal={false} space={20}/>
-                        <Text>
+                        <Text style={styles.terms}>
                             <Text style={styles.termsText}>By signing up you agree to our </Text>
                             <Text style={styles.termsLink}>Terms, Data Policy</Text>
                             <Text style={styles.termsText}> and </Text>
@@ -168,6 +171,9 @@ const styles = StyleSheet.create({
         color: primaryColor,
         fontSize: 14,
     },
+    terms: {
+        textAlign: 'center',
+    },
     termsText: {
         color: primaryColor,
         fontFamily: sansRegular,
@@ -176,7 +182,7 @@ const styles = StyleSheet.create({
     },
     termsLink: {
         color: primaryColor,
-        fontFamily: serifBold,
+        fontFamily: sansBold,
         fontSize: 12,
         lineHeight: 16,
     },

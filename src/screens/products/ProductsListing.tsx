@@ -1,28 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     FlatList,
-    SafeAreaView,
-    ScrollView,
     StyleSheet,
     Text,
-    Touchable,
     TouchableWithoutFeedback,
     View,
 } from 'react-native';
-import {baseStyle, primaryColor, sansRegular, serifBold} from '../../config/theme.ts';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {baseStyle, primaryColor, sansBold, sansRegular, serifBold} from '../../config/theme.ts';
 import PantryBackButton from '../../components/PantryBackButton.tsx';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import PantrySpacer from '../../components/PantrySpacer.tsx';
 import PantryBar from '../../components/PantryBar.tsx';
+import PantryProductItem from '../../components/PantryProductItem.tsx';
+
+export class PantryProduct {
+    id: number;
+    name: string;
+    category: string;
+    image: number;
+    price: number;
+}
 
 function ProductsListing(): React.JSX.Element {
     const navigation = useNavigation();
 
-    const [categories] = useState([
+    const numberOfProducts: number = 50;
+
+    const categories: Array<string> = [
         'All', 'Beef', 'Fish', 'Pork', 'Poultry',
-    ]);
+    ];
+    const images: Array<number> = [1, 2, 3, 4];
+
+    const [productList, setProductList] = useState<Array<PantryProduct>>([]);
+
     const [selectedCategories, setSelectedCategories] = useState(['All']);
+
+    useEffect(() => {
+        fillProducts();
+    }, []);
 
     function toggleCategory(cat: string) {
         if (selectedCategories.includes(cat)) {
@@ -36,49 +53,83 @@ function ProductsListing(): React.JSX.Element {
             if (modded.length === 0) {
                 modded.push('All');
             }
+            setSelectedCategories(modded);
         } else {
             // add
             setSelectedCategories([...selectedCategories, cat]);
         }
     }
 
+    function getRandomInt(min: number, max: number): number {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function fillProducts() {
+        let products: Array<PantryProduct> = [];
+        for (let i = 0; i < numberOfProducts; i++) {
+            const catIndex: number = getRandomInt(1, categories.length - 1);
+            const imageIndex: number = getRandomInt(0, images.length - 1);
+            const category: string = categories[catIndex];
+
+            const product: PantryProduct = new PantryProduct();
+            product.id = i + 1;
+            product.name = `Product ${i + 1}`;
+            product.category = category;
+            product.image = imageIndex;
+            product.price = getRandomInt(15, 100);
+
+            products[i] = product;
+        }
+        setProductList(products);
+        console.table(products);
+    }
+
     return (
         <View style={baseStyle.bgContainer}>
             <SafeAreaView style={styles.container}>
-                <ScrollView>
-                    <View style={styles.topGroup}>
-                        <View style={styles.navRow}>
-                            <PantryBackButton label={'Back'} onPress={navigation.goBack}/>
-                            <View style={styles.filterGroup}>
-                                <Text style={styles.filterText}>Filter</Text>
-                                <PantrySpacer horizontal={true} space={10}/>
-                                <Icon name={'sliders'} color={primaryColor} size={20}/>
-                            </View>
+                <View style={styles.topGroup}>
+                    <View style={styles.navRow}>
+                        <PantryBackButton label={'Back'} onPress={navigation.goBack}/>
+                        <View style={styles.filterGroup}>
+                            <Text style={styles.filterText}>Filter</Text>
+                            <PantrySpacer horizontal={true} space={10}/>
+                            <Icon name={'sliders'} color={primaryColor} size={20}/>
                         </View>
-                        <PantrySpacer horizontal={false} space={30}/>
-                        <Text style={styles.titleText}>Meat</Text>
-                        <PantrySpacer horizontal={false} space={10}/>
-                        <PantryBar/>
-                        <PantrySpacer horizontal={false} space={20}/>
-                        <FlatList
-                            data={categories}
-                            horizontal={true}
-                            keyExtractor={(_, index) => index.toString()}
-                            renderItem={({item}) => {
-                                return (
-                                    <FilterTile
-                                        title={item}
-                                        selected={selectedCategories.includes(item)}
-                                        onTap={(s) => toggleCategory(s)}/>
-                                );
-                            }}
-                        />
-                        <PantrySpacer horizontal={false} space={20}/>
-                        <Text style={styles.selectionText}>Based on your selection</Text>
-                        <Text style={styles.productsTitle}>Our products</Text>
-                        <PantrySpacer horizontal={false} space={20}/>
                     </View>
-                </ScrollView>
+                    <PantrySpacer horizontal={false} space={30}/>
+                    <Text style={styles.titleText}>Meat</Text>
+                    <PantrySpacer horizontal={false} space={10}/>
+                    <PantryBar/>
+                    <PantrySpacer horizontal={false} space={20}/>
+                    <FlatList
+                        data={categories}
+                        horizontal={true}
+                        keyExtractor={(_, index) => index.toString()}
+                        renderItem={({item}) => {
+                            return (
+                                <FilterTile
+                                    title={item}
+                                    selected={selectedCategories.includes(item)}
+                                    onTap={(s) => toggleCategory(s)}/>
+                            );
+                        }}
+                    />
+                    <PantrySpacer horizontal={false} space={20}/>
+                    <Text style={styles.selectionText}>Based on your selection</Text>
+                    <Text style={styles.productsTitle}>Our products</Text>
+                    <PantrySpacer horizontal={false} space={20}/>
+                    <FlatList
+                        data={productList}
+                        numColumns={2}
+                        columnWrapperStyle={styles.row}
+                        renderItem={({item}) => {
+                            return (
+                                <PantryProductItem product={item}/>
+                            );
+                        }}/>
+                </View>
             </SafeAreaView>
         </View>
     );
@@ -107,7 +158,6 @@ const styles = StyleSheet.create({
     topGroup: {
         margin: 16,
     },
-    backArrowBar: {},
     navRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -130,8 +180,7 @@ const styles = StyleSheet.create({
         fontSize: 40,
     },
     filterTextActive: {
-        // todo switch to sansBold when it works
-        fontFamily: serifBold,
+        fontFamily: sansBold,
         color: primaryColor,
         fontSize: 14,
         paddingEnd: 10,
@@ -154,6 +203,10 @@ const styles = StyleSheet.create({
         color: primaryColor,
         fontFamily: serifBold,
         lineHeight: 40,
+    },
+    row: {
+        flex: 1,
+        justifyContent: 'space-around',
     },
 });
 

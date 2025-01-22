@@ -6,26 +6,19 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import PantryAppNavigator from "./src/navigation/navigator.tsx";
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import PantryAppNavigator from './src/navigation/navigator.tsx';
+import Toast from 'react-native-toast-message';
 
 function App(): React.JSX.Element {
-//  const isDarkMode = useColorScheme() === 'dark';
-
-//  const backgroundStyle = {
-//    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-//  };
-
-  return <PantryAppNavigator/>
+    return (
+        <SafeAreaProvider>
+            <>
+                <PantryAppNavigator/>
+                <Toast/>
+            </>
+        </SafeAreaProvider>
+    );
 }
 
 export default App;
