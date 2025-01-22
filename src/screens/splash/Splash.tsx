@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {baseStyle, primaryColor, serifBold} from '../../config/theme.ts';
+import {
+    baseStyle,
+    primaryColor,
+    serifBold,
+} from '../../config/theme.ts';
 import {useNavigation} from '@react-navigation/native';
 import {routeRegister} from '../../navigation/navigator.tsx';
 import {SafeAreaView} from 'react-native-safe-area-context';

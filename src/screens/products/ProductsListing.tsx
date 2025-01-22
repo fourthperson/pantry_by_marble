@@ -7,21 +7,20 @@ import {
     View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {baseStyle, primaryColor, sansBold, sansRegular, serifBold} from '../../config/theme.ts';
+import {
+    baseStyle,
+    primaryColor,
+    sansBold,
+    sansRegular,
+    serifBold,
+} from '../../config/theme.ts';
 import PantryBackButton from '../../components/PantryBackButton.tsx';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import PantrySpacer from '../../components/PantrySpacer.tsx';
 import PantryBar from '../../components/PantryBar.tsx';
 import PantryProductItem from '../../components/PantryProductItem.tsx';
-
-export class PantryProduct {
-    id: number;
-    name: string;
-    category: string;
-    image: number;
-    price: number;
-}
+import {PantryProduct} from '../../types/PantryProduct.ts';
 
 function ProductsListing(): React.JSX.Element {
     const navigation = useNavigation();

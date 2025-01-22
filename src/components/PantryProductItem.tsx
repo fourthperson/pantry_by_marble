@@ -1,9 +1,22 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+    Image,
+    ImageSourcePropType,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import PantrySpacer from './PantrySpacer.tsx';
-import {PantryProduct} from '../screens/products/ProductsListing.tsx';
-import {baseStyle, primaryColor, productImages, sansBold, sansRegular} from '../config/theme.ts';
+import {
+    baseStyle,
+    primaryColor,
+    productImages,
+    sansBold,
+    sansRegular,
+} from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Feather';
+import {PantryProduct} from '../types/PantryProduct.ts';
 
 interface PantryProductProps {
     product: PantryProduct

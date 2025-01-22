@@ -7,7 +7,11 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import {primaryColor, sansRegular, serifBold} from '../config/theme.ts';
+import {
+    primaryColor,
+    sansRegular,
+    serifBold,
+} from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Feather';
 
 export interface PantryTextInputprops {
