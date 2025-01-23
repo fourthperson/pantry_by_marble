@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from '../screens/splash/Splash.tsx';
@@ -8,12 +8,14 @@ import ProductsListing from '../screens/home/products/ProductsListing.tsx';
 import Cart from '../screens/home/cart/Cart.tsx';
 import {StyleSheet} from 'react-native';
 import {
-    primaryColor,
+    bgColor,
+    primaryColor, sansRegular,
     tabInactiveColor,
 } from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import EmptyScreen from '../screens/home/empty/Empty.tsx';
+import {useSelector} from 'react-redux';
 
 export const routeSplash = 'splash';
 export const routeRegister = 'register';
@@ -32,6 +34,16 @@ function tabTint(active: boolean) {
 }
 
 function Home(): React.JSX.Element {
+    const cart = useSelector(state => state.cart);
+    const [cartCount, setCartCount] = useState<number>(0);
+
+    useEffect(() => {
+        if (!Array.isArray(cart.cart)) {
+            return;
+        }
+        setCartCount(cart.cart.length);
+    }, [cart]);
+
     return (
         <Tab.Navigator
             initialRouteName={routeProducts}
@@ -81,6 +93,8 @@ function Home(): React.JSX.Element {
                 name={routeCart}
                 component={Cart}
                 options={{
+                    tabBarBadge: cartCount === 0 ? undefined : cartCount,
+                    tabBarBadgeStyle: styles.tabBarBadgeStyle,
                     tabBarIcon: ({focused, size}) => (
                         <Icon
                             name={'cart-outline'}
@@ -136,6 +150,11 @@ const styles = StyleSheet.create({
         backgroundColor: primaryColor,
         position: 'static',
         borderTopWidth: 0,
+    },
+    tabBarBadgeStyle: {
+        color: primaryColor,
+        fontFamily: sansRegular,
+        backgroundColor: bgColor,
     },
 });
 
