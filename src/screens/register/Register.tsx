@@ -13,14 +13,14 @@ import {
     sansRegular,
     serifBold,
 } from '../../config/theme.ts';
-import PantryTextInput from '../../components/PantryTextInput.tsx';
+import PantryTextInput, {PantryPhoneInput} from '../../components/PantryTextInput.tsx';
 import PantryButton from '../../components/PantryButton.tsx';
 import PantrySpacer from '../../components/PantrySpacer.tsx';
 import PantryBackButton from '../../components/PantryBackButton.tsx';
 import PantryBar from '../../components/PantryBar.tsx';
 import {useNavigation} from '@react-navigation/native';
 import {routeHome} from '../../navigation/navigator.tsx';
-import {alertMsg} from '../../util/util.ts';
+import {alertMsg, validPhone} from '../../util/util.ts';
 import * as EmailValidator from 'email-validator';
 
 function RegisterScreen(): React.JSX.Element {
@@ -50,6 +50,14 @@ function RegisterScreen(): React.JSX.Element {
         }
         if (!EmailValidator.validate(emailAddress)) {
             alertMsg('Enter a valid email addres', 'warning');
+            return;
+        }
+        if (mobileNumber === '') {
+            alertMsg('Entre your mobile number', 'warning');
+            return;
+        }
+        if (!validPhone(mobileNumber, 'ZA')) {
+            alertMsg('Entre a valid mobile number', 'warning');
             return;
         }
         if (password === '') {
@@ -97,14 +105,14 @@ function RegisterScreen(): React.JSX.Element {
                             onTextChanged={setEmailAddress}
                             keyboardType={'email-address'}
                             isPasswordField={false}/>
-                        <PantryTextInput
+                        <PantryPhoneInput
                             label={'Mobile Number'}
+                            prefix={'+27'}
                             value={mobileNumber}
                             onTextChanged={setMobileNumber}
-                            keyboardType={'phone-pad'}
-                            isPasswordField={false}/>
+                            keyboardType={'phone-pad'}/>
                         <PantryTextInput
-                            label={'Password'}
+                            label={'Create password'}
                             value={password}
                             onTextChanged={setPassword}
                             keyboardType={'default'}

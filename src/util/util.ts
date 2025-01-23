@@ -1,6 +1,7 @@
 import IMAGES from '../../assets/images';
 import {showMessage, MessageType} from 'react-native-flash-message';
 import {sansRegular} from '../config/theme.ts';
+import {CountryCode, isPossibleNumber, isValidPhoneNumber} from 'libphonenumber-js';
 
 export function imageMapper(index: number) {
     switch (index) {
@@ -31,4 +32,8 @@ export function alertMsg(message: string, type: MessageType, title?: string) {
             color: 'white',
         },
     });
+}
+
+export function validPhone(phone: string, countryCode: CountryCode): boolean {
+    return isPossibleNumber(phone, countryCode) && isValidPhoneNumber(phone, countryCode);
 }

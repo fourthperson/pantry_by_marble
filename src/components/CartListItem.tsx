@@ -45,7 +45,7 @@ function CartListItem(item: CartItem): React.JSX.Element {
                 </Text>
                 <Text
                     numberOfLines={1}
-                    style={styles.nameStyle}>
+                    style={styles.priceStyle}>
                     {
                         formatPrice(item.product.price)
                     }

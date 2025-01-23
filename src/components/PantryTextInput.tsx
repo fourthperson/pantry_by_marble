@@ -42,6 +42,7 @@ function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {
                     <TextInput
                         style={styles.inputStyle}
                         value={value}
+                        selectionColor={primaryColor}
                         autoCapitalize="none"
                         onChangeText={setValue}
                         cursorColor={primaryColor}
@@ -56,6 +57,56 @@ function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {
                     }}>
                     <Icon
                         name={props.isPasswordField ? showValue ? 'eye-off' : 'eye' : 'x'}
+                        color={primaryColor}
+                        size={22}/>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.divider}/>
+            <View style={styles.spacer}/>
+        </View>
+    );
+}
+
+export interface PhoneInputProps {
+    label: string;
+    prefix: string;
+    value: string;
+    onTextChanged: (s: string) => void;
+    keyboardType: KeyboardTypeOptions;
+}
+
+export function PantryPhoneInput(props: PhoneInputProps): React.JSX.Element {
+    const [value, setValue] = useState(props.value);
+
+    useEffect(() => {
+        props.onTextChanged(value);
+    }, [props, value]);
+
+    function clear() {
+        setValue('');
+    }
+
+    return (
+        <View>
+            <Text style={styles.labelText}>{props.label}</Text>
+            <View style={styles.inputRow}>
+                <Text style={styles.inputStyle}>{`${props.prefix}  |  `}</Text>
+                <View style={styles.fillSpace}>
+                    <TextInput
+                        style={styles.inputStyle}
+                        value={value}
+                        selectionColor={primaryColor}
+                        autoCapitalize="none"
+                        onChangeText={setValue}
+                        cursorColor={primaryColor}
+                        keyboardType={props.keyboardType}
+                        underlineColorAndroid={'transparent'}/>
+                </View>
+                <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={clear}>
+                    <Icon
+                        name={'x'}
                         color={primaryColor}
                         size={22}/>
                 </TouchableOpacity>
