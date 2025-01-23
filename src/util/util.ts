@@ -12,3 +12,11 @@ export function imageMapper(index: number) {
             return IMAGES.FOUR;
     }
 }
+
+export function formatPrice(p: number): string {
+    return `R ${p.toFixed(2).toString()}`;
+}
+
+export function toastMessage(message: string) {
+
+}

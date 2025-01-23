@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
+    FlatList,
+    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -18,34 +20,34 @@ import PantrySpacer from '../../../components/PantrySpacer.tsx';
 import {useNavigation} from '@react-navigation/native';
 import PantryBar from '../../../components/PantryBar.tsx';
 import PantryButton from '../../../components/PantryButton.tsx';
-import {PantryProduct} from '../../../types/PantryProduct.ts';
-import CartItem from '../../../components/CartItem.tsx';
+import {CartItem} from '../../../types/types.ts';
+import CartListItem from '../../../components/CartListItem.tsx';
+import {useSelector} from 'react-redux';
+import {formatPrice} from '../../../util/util.ts';
 
 function Cart(): React.JSX.Element {
     const navigation = useNavigation();
 
-    const [cartList, setCartList] = useState<Array<PantryProduct>>([]);
+    const cart = useSelector(state => state.cart);
+    console.log(cart);
 
-    const count = [1, 2, 3, 4, 5];
+    const [cartList, setCartList] = useState<Array<CartItem>>([]);
 
-//    [
-//        {"product": {}, quantity: 5},
-//        {"product": {}, quantity: 5},
-//    ]
+    const deliveryFee = 28;
 
     useEffect(() => {
         fillList();
-    }, []);
+    }, [cart]);
 
     function fillList() {
-        const product = new PantryProduct();
-        product.id = 1;
-        product.image = 2;
-        product.price = 123;
-        product.category = 'Lamb Chops';
-        product.name = 'Product 334';
-
-        setCartList([product]);
+        if (!Array.isArray(cart.cart)) {
+            return;
+        }
+        const items: Array<CartItem> = [];
+        for (let i = 0; i < cart.cart.length; i++) {
+            items.push(cart.cart[i] as CartItem);
+        }
+        setCartList(items);
     }
 
     function checkout() {
@@ -66,17 +68,21 @@ function Cart(): React.JSX.Element {
                 </View>
                 <View style={[baseStyle.fillSpace]}>
                     {
-                        cartList.length > 0 &&
-                        count.map((_) => {
-                            return <CartItem product={cartList[0]} quantity={1}/>;
-                        })
+                        cartList && cartList.length > 0 &&
+                        <FlatList
+                            data={cartList}
+                            renderItem={({item}) => <CartListItem
+                                product={item.product}
+                                quantity={item.quantity}/>}
+                            contentContainerStyle={styles.flatlistBottom}
+                        />
                     }
                 </View>
                 <View style={styles.checkoutGroup}>
-                    <CheckoutTally label={'Sub total'} value={'R 289.00'}/>
-                    <CheckoutTally label={'Delivery'} value={'R 28.00'}/>
+                    <CheckoutTally label={'Sub total'} value={formatPrice(cart.total)}/>
+                    <CheckoutTally label={'Delivery'} value={formatPrice(deliveryFee)}/>
                     <View style={styles.checkoutDivider}/>
-                    <CheckoutTotal label={'Total'} value={'R 317.00'}/>
+                    <CheckoutTotal label={'Total'} value={formatPrice(cart.total + deliveryFee)}/>
                     <PantrySpacer horizontal={false} space={20}/>
                     <PantryButton label={'Checkout'} onPress={checkout}/>
                 </View>
@@ -162,6 +168,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: primaryColor,
     },
+    flatlistBottom: {
+        paddingBottom: 200,
+    },
+
 });
 
 export default Cart;

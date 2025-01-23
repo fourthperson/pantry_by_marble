@@ -1,56 +1,53 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {primaryColor, sansBold, sansRegular, serifBold, serifItalic} from '../config/theme.ts';
-import {PantryProduct} from '../types/PantryProduct.ts';
 import PantrySpacer from './PantrySpacer.tsx';
 import Icon from 'react-native-vector-icons/Feather';
-import {imageMapper} from '../util/util.ts';
+import {formatPrice, imageMapper} from '../util/util.ts';
+import {CartItem} from '../types/types.ts';
+import {useDispatch} from 'react-redux';
+import {increaseQuantity, removeFromCart, subtractQuantity} from '../store/cart_slice';
 
-interface CartItemProps {
-    product: PantryProduct;
-    quantity: number;
-}
+function CartListItem(item: CartItem): React.JSX.Element {
+    const dispatch = useDispatch();
 
-function CartItem(props: CartItemProps): React.JSX.Element {
-    const [count, setCount] = useState<number>(props.quantity);
+    const [count, setCount] = useState<number>(item.quantity);
 
     function add() {
-        console.log(`Adding ${count}`);
+        dispatch(increaseQuantity(item));
         setCount(count + 1);
     }
 
     function sub() {
         if (count > 1) {
+            dispatch(subtractQuantity(item));
             setCount(prev => prev - 1);
         }
     }
 
-    function formatPrice(p: number): string {
-        return `R ${p.toFixed(2).toString()}`;
-    }
-
     function remove() {
+        dispatch(removeFromCart(item));
     }
 
     return (
         <View style={[styles.container]}>
             <Image
                 style={styles.image}
-                source={imageMapper(props.product.image)}/>
+                source={imageMapper(item.product.image)}/>
             <PantrySpacer horizontal={true} space={20}/>
-            <View style={{paddingVertical: 16, justifyContent: 'space-around'}}>
+            <View style={styles.detailGroup}>
                 <Text
                     numberOfLines={2}
                     style={styles.nameStyle}>
                     {
-                        props.product.name.toUpperCase()
+                        item.product.name.toUpperCase()
                     }
                 </Text>
                 <Text
                     numberOfLines={1}
                     style={styles.nameStyle}>
                     {
-                        formatPrice(props.product.price)
+                        formatPrice(item.product.price)
                     }
                 </Text>
                 <View style={styles.actionGroup}>
@@ -113,6 +110,10 @@ const styles = StyleSheet.create({
         height: 126,
         width: 133,
     },
+    detailGroup: {
+        paddingVertical: 16,
+        justifyContent: 'space-around',
+    },
     nameStyle: {
         fontFamily: serifItalic,
         fontSize: 16,
@@ -160,4 +161,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CartItem;
+export default CartListItem;

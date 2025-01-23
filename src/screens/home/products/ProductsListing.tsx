@@ -1,29 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {
-    FlatList,
-    StyleSheet,
-    Text,
-    TouchableWithoutFeedback,
-    View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {
-    baseStyle,
-    primaryColor,
-    sansBold,
-    sansRegular,
-    serifBold,
-} from '../../../config/theme.ts';
+import {baseStyle, primaryColor, sansBold, sansRegular, serifBold} from '../../../config/theme.ts';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import {PantryProduct} from '../../../types/PantryProduct.ts';
 import PantryBackButton from '../../../components/PantryBackButton.tsx';
 import PantrySpacer from '../../../components/PantrySpacer.tsx';
 import PantryBar from '../../../components/PantryBar.tsx';
-import PantryProductItem from '../../../components/PantryProductItem.tsx';
+import PantryProductListItem from '../../../components/PantryProductListItem.tsx';
+import {CartItem, PantryProduct} from '../../../types/types.ts';
+import {useDispatch} from 'react-redux';
+import {addToCart} from '../../../store/cart_slice';
 
 function ProductsListing(): React.JSX.Element {
     const navigation = useNavigation();
+
+    const dispatch = useDispatch();
 
     const numberOfProducts: number = 50;
 
@@ -83,16 +75,23 @@ function ProductsListing(): React.JSX.Element {
             const imageIndex: number = getRandomInt(0, images.length - 1);
             const category: string = categories[catIndex];
 
-            const product: PantryProduct = new PantryProduct();
-            product.id = i + 1;
-            product.name = `Product ${i + 1}`;
-            product.category = category;
-            product.image = imageIndex;
-            product.price = getRandomInt(15, 100);
-
-            products[i] = product;
+            products[i] = {
+                id: i + 1,
+                name: `Product ${i + 1}`,
+                category: category,
+                image: imageIndex,
+                price: getRandomInt(15, 100),
+            };
         }
         setProductList(products);
+    }
+
+    function dispatchAddToCart(product: PantryProduct) {
+        const cartItem: CartItem = {
+            quantity: 1,
+            product: product,
+        };
+        dispatch(addToCart(cartItem));
     }
 
     return (
@@ -134,7 +133,12 @@ function ProductsListing(): React.JSX.Element {
                         numColumns={2}
                         columnWrapperStyle={styles.row}
                         renderItem={({item}) => {
-                            return (<PantryProductItem product={item}/>);
+                            return (
+                                <PantryProductListItem
+                                    product={item}
+                                    onCartPress={() => dispatchAddToCart(item)}
+                                />
+                            );
                         }}
                         contentContainerStyle={styles.flatlistBottom}/>
                 </View>
@@ -216,7 +220,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-around',
     },
-    flatlistBottom: {paddingBottom: 240},
+    flatlistBottom: {
+        paddingBottom: 220,
+    },
 });
 
 export default ProductsListing;

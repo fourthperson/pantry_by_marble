@@ -15,17 +15,14 @@ import {
 } from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Feather';
 import {PantryProduct} from '../types/PantryProduct.ts';
-import {imageMapper} from '../util/util.ts';
+import {formatPrice, imageMapper} from '../util/util.ts';
 
 interface PantryProductProps {
     product: PantryProduct
+    onCartPress: () => void
 }
 
-function PantryProductItem(props: PantryProductProps): React.JSX.Element {
-
-    function formatPrice(p: number): string {
-        return `R ${p.toFixed(2).toString()}`;
-    }
+function PantryProductListItem(props: PantryProductProps): React.JSX.Element {
 
     return (
         <View>
@@ -40,8 +37,8 @@ function PantryProductItem(props: PantryProductProps): React.JSX.Element {
                 <View style={baseStyle.fillSpace}>
                     <Text style={styles.priceText}>{formatPrice(props.product.price)}</Text>
                 </View>
-                <TouchableOpacity>
-                    <View style={styles.circularBorder}>
+                <TouchableOpacity onPress={(_) => props.onCartPress()}>
+                    < View style={styles.circularBorder}>
                         <Icon name={'shopping-cart'} size={16} color={primaryColor}/>
                     </View>
                 </TouchableOpacity>
@@ -86,4 +83,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PantryProductItem;
+export default PantryProductListItem;
