@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { baseStyle } from '../../../config/theme';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {Text, View} from 'react-native';
+import {baseStyle} from '../../../config/theme';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 function Cart(): React.JSX.Element {
     return (

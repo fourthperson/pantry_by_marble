@@ -41,22 +41,26 @@ function ProductsListing(): React.JSX.Element {
     }, []);
 
     function toggleCategory(cat: string) {
-        if (selectedCategories.includes(cat)) {
+        let modded = selectedCategories;
+        if (modded.includes(cat)) {
             // remove
-            const index: number = selectedCategories.indexOf(cat);
-            let modded = selectedCategories;
+            const index: number = modded.indexOf(cat);
             if (index > -1) {
                 modded = selectedCategories.splice(index);
                 setSelectedCategories(modded);
             }
-            if (modded.length === 0) {
-                modded.push('All');
-            }
-            setSelectedCategories(modded);
         } else {
             // add
-            setSelectedCategories([...selectedCategories, cat]);
+            modded.push(cat);
         }
+        if (modded.length === 0) {
+            modded.push('All');
+        }
+        if (modded.length > 1 && modded.includes(categories[0])) {
+            // remove all if length > 1 and includes all
+            modded.splice(selectedCategories.indexOf(categories[0]));
+        }
+        setSelectedCategories([...modded]);
     }
 
     function getRandomInt(min: number, max: number): number {
@@ -123,10 +127,9 @@ function ProductsListing(): React.JSX.Element {
                         numColumns={2}
                         columnWrapperStyle={styles.row}
                         renderItem={({item}) => {
-                            return (
-                                <PantryProductItem product={item}/>
-                            );
-                        }}/>
+                            return (<PantryProductItem product={item}/>);
+                        }}
+                        contentContainerStyle={styles.flatlistBottom}/>
                 </View>
             </SafeAreaView>
         </View>
@@ -206,6 +209,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-around',
     },
+    flatlistBottom: {paddingBottom: 240},
 });
 
 export default ProductsListing;

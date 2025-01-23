@@ -6,68 +6,97 @@ import RegisterScreen from '../screens/register/Register.tsx';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProductsListing from '../screens/home/products/ProductsListing.tsx';
 import Cart from '../screens/home/cart/Cart.tsx';
-import {StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
-import {baseStyle} from '../config/theme.ts';
-import Icon from 'react-native-vector-icons/Feather';
+import {StyleSheet} from 'react-native';
+import {primaryColor, tabInactiveColor} from '../config/theme.ts';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import EmptyScreen from '../screens/home/empty/Empty.tsx';
 
 export const routeSplash = 'splash';
 export const routeRegister = 'register';
 export const routeHome = 'home';
 export const routeProducts = 'products';
 export const routeCart = 'cart';
+export const routeFavourites = 'favourites';
+export const routeSearch = 'search';
+export const routeProfile = 'profile';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-interface PanytryTabProps {
-    isActive: boolean;
-    route: string;
-    icon: string;
-    navigation: any;
-}
-
-function PantryTab(props: PanytryTabProps): React.JSX.Element {
-    function navigate() {
-        props.navigation.navigate(props.route);
-    }
-
-    return (
-        <TouchableOpacity onPress={navigate}>
-            <View style={baseStyle.fillSpace}>
-                <Icon name={props.icon} color={'#ffffff'}/>
-            </View>
-        </TouchableOpacity>
-    );
-}
-
-function PantryTabBar({state, descriptors, navigation}): React.JSX.Element {
-    return (
-        <View style={styles.row}>
-            <PantryTab
-                navigation={navigation}
-                isActive={state.index === 0}
-                route={routeProducts}
-                icon={'home'}/>
-            <PantryTab
-                navigation={navigation}
-                isActive={state.index === 1}
-                route={routeCart}
-                icon={'shopping-cart'}/>
-        </View>
-    );
+function tabTint(active: boolean) {
+    return active ? 'white' : tabInactiveColor;
 }
 
 function Home(): React.JSX.Element {
     return (
         <Tab.Navigator
-            screenOptions={{headerShown: false}}
-            tabBar={(props) => PantryTabBar({...props})}>
+            initialRouteName={routeProducts}
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: styles.tabBar,
+            }}>
             <Tab.Screen
                 name={routeProducts}
-                component={ProductsListing}/>
+                component={ProductsListing}
+                options={{
+                    tabBarIcon: ({focused, size}) => (
+                        <Icon
+                            name={'home-outline'}
+                            size={size}
+                            color={tabTint(focused)}
+                        />
+                    ),
+                }}/>
+            <Tab.Screen
+                name={routeFavourites}
+                component={EmptyScreen}
+                options={{
+                    tabBarIcon: ({focused, size}) => (
+                        <Icon
+                            name={'heart-outline'}
+                            size={size}
+                            color={tabTint(focused)}
+                        />
+                    ),
+                }}/>
+            <Tab.Screen
+                name={routeSearch}
+                component={EmptyScreen}
+                options={{
+                    tabBarIcon: ({focused, size}) => (
+                        <Icon
+                            name={'search-outline'}
+                            size={size}
+                            color={tabTint(focused)}
+                        />
+                    ),
+                }}/>
             <Tab.Screen
                 name={routeCart}
-                component={Cart}/>
+                component={Cart}
+                options={{
+                    tabBarIcon: ({focused, size}) => (
+                        <Icon
+                            name={'cart-outline'}
+                            size={size}
+                            color={tabTint(focused)}
+                        />
+                    ),
+                }}/>
+            <Tab.Screen
+                name={routeProfile}
+                component={EmptyScreen}
+                options={{
+                    tabBarIcon: ({focused, size}) => (
+                        <Icon
+                            name={'person-outline'}
+                            size={size}
+                            color={tabTint(focused)}
+                        />
+                    ),
+                }}/>
         </Tab.Navigator>
     );
 }
@@ -95,6 +124,14 @@ function PantryAppNavigator(): React.JSX.Element {
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
+    },
+    tabBar: {
+        height: 80,
+        paddingHorizontal: 5,
+        paddingTop: 15,
+        backgroundColor: primaryColor,
+        position: 'static',
+        borderTopWidth: 0,
     },
 });
 

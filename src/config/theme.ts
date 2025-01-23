@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 // colors
 export const bgColor = '#FCF9F5';
 export const primaryColor = '#54634B';
+export const tabInactiveColor = '#999f91';
 
 // fonts
 export const serifRegular = 'Adobe Garamond Pro';
