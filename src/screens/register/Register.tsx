@@ -22,6 +22,10 @@ import {useNavigation} from '@react-navigation/native';
 import {routeHome} from '../../navigation/navigator.tsx';
 import {alertMsg, validPhone} from '../../util/util.ts';
 import * as EmailValidator from 'email-validator';
+import {
+    defaultCountryCallingCode,
+    defaultCountryCode,
+} from '../../config/constants.ts';
 
 function RegisterScreen(): React.JSX.Element {
     const [fullName, setFullname] = useState('');
@@ -31,7 +35,7 @@ function RegisterScreen(): React.JSX.Element {
 
     const navigation = useNavigation();
 
-    function products() {
+    function home() {
         navigation.push(routeHome);
     }
 
@@ -56,7 +60,7 @@ function RegisterScreen(): React.JSX.Element {
             alertMsg('Entre your mobile number', 'warning');
             return;
         }
-        if (!validPhone(mobileNumber, 'ZA')) {
+        if (!validPhone(mobileNumber, defaultCountryCode)) {
             alertMsg('Entre a valid mobile number', 'warning');
             return;
         }
@@ -107,7 +111,7 @@ function RegisterScreen(): React.JSX.Element {
                             isPasswordField={false}/>
                         <PantryPhoneInput
                             label={'Mobile Number'}
-                            prefix={'+27'}
+                            prefix={defaultCountryCallingCode}
                             value={mobileNumber}
                             onTextChanged={setMobileNumber}
                             keyboardType={'phone-pad'}/>
@@ -135,7 +139,7 @@ function RegisterScreen(): React.JSX.Element {
                         <PantrySpacer horizontal={false} space={20}/>
                         <PantryButton
                             label={'Explore our app'}
-                            onPress={products}/>
+                            onPress={home}/>
                         <PantrySpacer horizontal={false} space={20}/>
                         <Text style={styles.terms}>
                             <Text style={styles.termsText}>By signing up you agree to our </Text>

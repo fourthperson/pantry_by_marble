@@ -1,7 +1,17 @@
 import IMAGES from '../../assets/images';
 import {showMessage, MessageType} from 'react-native-flash-message';
 import {sansRegular} from '../config/theme.ts';
-import {CountryCode, isPossibleNumber, isValidPhoneNumber} from 'libphonenumber-js';
+import {
+    CountryCode,
+    isPossibleNumber,
+    isValidPhoneNumber,
+} from 'libphonenumber-js';
+
+export function getRandomInt(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 export function imageMapper(index: number) {
     switch (index) {

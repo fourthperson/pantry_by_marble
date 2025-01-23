@@ -28,9 +28,9 @@ export const baseStyle = StyleSheet.create({
   },
 });
 
-export const productImages = {
-  0: require('../../assets/images/1.jpeg'),
-  1: require('../../assets/images/2.jpeg'),
-  2: require('../../assets/images/3.jpeg'),
-  3: require('../../assets/images/4.jpeg'),
-};
+//export const productImages = {
+//  0: require('../../assets/images/1.jpeg'),
+//  1: require('../../assets/images/2.jpeg'),
+//  2: require('../../assets/images/3.jpeg'),
+//  3: require('../../assets/images/4.jpeg'),
+//};

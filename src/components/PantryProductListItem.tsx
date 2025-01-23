@@ -14,8 +14,11 @@ import {
     sansRegular,
 } from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Feather';
-import {PantryProduct} from '../types/PantryProduct.ts';
-import {formatPrice, imageMapper} from '../util/util.ts';
+import {
+    formatPrice,
+    imageMapper,
+} from '../util/util.ts';
+import {PantryProduct} from '../types/types.ts';
 
 interface PantryProductProps {
     product: PantryProduct

@@ -7,7 +7,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProductsListing from '../screens/home/products/ProductsListing.tsx';
 import Cart from '../screens/home/cart/Cart.tsx';
 import {StyleSheet} from 'react-native';
-import {primaryColor, tabInactiveColor} from '../config/theme.ts';
+import {
+    primaryColor,
+    tabInactiveColor,
+} from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import EmptyScreen from '../screens/home/empty/Empty.tsx';

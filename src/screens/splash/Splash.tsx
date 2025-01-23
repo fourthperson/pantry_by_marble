@@ -1,5 +1,9 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {
+    Animated,
+    StyleSheet,
+    View,
+} from 'react-native';
 import {
     baseStyle,
     primaryColor,
@@ -8,25 +12,29 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {routeRegister} from '../../navigation/navigator.tsx';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {
+    splashDurationMillis,
+    textAnomationDurationMillis,
+} from '../../config/constants.ts';
 
 function SplashScreen(): React.JSX.Element {
     const navigation = useNavigation();
 
     const fade: Animated.Value = useRef(new Animated.Value(0)).current;
 
-    function animation() {
+    function animateText() {
         Animated.timing(fade, {
             toValue: 1,
-            duration: 2000,
+            duration: textAnomationDurationMillis,
             useNativeDriver: true,
         }).start();
     }
 
     useEffect(() => {
-        animation();
+        animateText();
         setTimeout(() => {
             navigation.replace(routeRegister);
-        }, 2250);
+        }, splashDurationMillis);
     });
 
     return (

@@ -5,7 +5,10 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import {primaryColor, sansRegular} from '../config/theme.ts';
+import {
+    primaryColor,
+    sansRegular,
+} from '../config/theme.ts';
 
 export interface PantryButtonProps {
     label: string;

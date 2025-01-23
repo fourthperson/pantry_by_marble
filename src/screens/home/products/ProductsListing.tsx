@@ -1,80 +1,64 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {
+    FlatList,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {baseStyle, primaryColor, sansBold, sansRegular, serifBold} from '../../../config/theme.ts';
+import {
+    baseStyle,
+    primaryColor,
+    sansBold,
+    sansRegular,
+    serifBold,
+} from '../../../config/theme.ts';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import PantryBackButton from '../../../components/PantryBackButton.tsx';
 import PantrySpacer from '../../../components/PantrySpacer.tsx';
 import PantryBar from '../../../components/PantryBar.tsx';
 import PantryProductListItem from '../../../components/PantryProductListItem.tsx';
-import {CartItem, PantryProduct} from '../../../types/types.ts';
+import {
+    CartItem,
+    PantryProduct,
+} from '../../../types/types.ts';
 import {useDispatch} from 'react-redux';
 import {addToCart} from '../../../store/cart_slice';
-import {alertMsg} from '../../../util/util.ts';
+import {alertMsg, getRandomInt} from '../../../util/util.ts';
+import {
+    numberOfProducts,
+    productCategories,
+    productImages,
+} from '../../../config/constants.ts';
 
 function ProductsListing(): React.JSX.Element {
     const navigation = useNavigation();
 
     const dispatch = useDispatch();
 
-    const numberOfProducts: number = 50;
-
-    const categories: Array<string> = [
-        'All', 'Beef', 'Fish', 'Pork', 'Poultry',
-    ];
-    const images: Array<number> = [1, 2, 3, 4];
+    const categoryAll = productCategories[0];
 
     const [productList, setProductList] = useState<Array<PantryProduct>>([]);
+    const [filteredProducts, setFilteredProducts] = useState<Array<PantryProduct>>([]);
 
-    const [selectedCategories, setSelectedCategories] = useState(['All']);
+    const [selectedCategories, setSelectedCategories] = useState([categoryAll]);
 
     useEffect(() => {
-        fillProducts();
+        populateProducts();
     }, []);
 
-    function toggleCategory(cat: string) {
-        let modded: Array<string> = selectedCategories;
-        if (modded.includes(cat)) {
-            // remove
-            const index: number = modded.indexOf(cat);
-            if (index > -1) {
-                modded = modded.splice(index);
-            }
-        } else {
-            if (cat === categories[0]) {
-                // all category selected
-                // remove all others
-                modded = [];
-                // add all
-                modded.push(categories[0]);
-            } else {
-                // add new category
-                modded.push(cat);
-            }
-        }
-        if (modded.length === 0) {
-            modded.push('All');
-        }
-        if (modded.length > 1 && modded.includes(categories[0])) {
-            // remove all if length > 1 and includes all
-            modded.splice(selectedCategories.indexOf(categories[0]));
-        }
-        setSelectedCategories(modded);
-    }
+    useEffect(() => {
+        filterProductsByCategory();
+    }, [selectedCategories, productList]);
 
-    function getRandomInt(min: number, max: number): number {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function fillProducts() {
+    function populateProducts() {
         let products: Array<PantryProduct> = [];
         for (let i = 0; i < numberOfProducts; i++) {
-            const catIndex: number = getRandomInt(1, categories.length - 1);
-            const imageIndex: number = getRandomInt(0, images.length - 1);
-            const category: string = categories[catIndex];
+            const catIndex: number = getRandomInt(1, productCategories.length - 1);
+            const imageIndex: number = getRandomInt(0, productImages.length - 1);
+            const category: string = productCategories[catIndex];
 
             products[i] = {
                 id: i + 1,
@@ -87,13 +71,60 @@ function ProductsListing(): React.JSX.Element {
         setProductList(products);
     }
 
+    function toggleCategory(cat: string) {
+        let array = [...selectedCategories];
+        if (cat !== categoryAll) {
+            // remove the 'All' category
+            const allIndex = array.indexOf(categoryAll);
+            if (allIndex > -1) {
+                array.splice(allIndex, 1);
+            }
+            if (array.includes(cat)) {
+                // remove category
+                const index = array.indexOf(cat);
+                if (index > -1) {
+                    // exists, remove
+                    array.splice(index, 1);
+                }
+            } else {
+                // add
+                array.push(cat);
+            }
+            if (array.length === 0) {
+                array = [categoryAll];
+            }
+        } else {
+            array = [categoryAll];
+        }
+        setSelectedCategories([...array]);
+    }
+
+    function filterProductsByCategory() {
+        if (selectedCategories.length === 1 && selectedCategories[0] === categoryAll) {
+            // clear filters
+            setFilteredProducts([...productList]);
+        } else {
+            // filter
+            let matches: Array<PantryProduct> = [];
+            for (let i = 0; i < selectedCategories.length; i++) {
+                for (let j = 0; j < productList.length; j++) {
+                    if (productList[j].category === selectedCategories[i]) {
+                        // match
+                        matches.push(productList[j]);
+                    }
+                }
+            }
+            setFilteredProducts(matches);
+        }
+    }
+
     function dispatchAddToCart(product: PantryProduct) {
         const cartItem: CartItem = {
             quantity: 1,
             product: product,
         };
         dispatch(addToCart(cartItem));
-        alertMsg('Added to cart!', 'success');
+        alertMsg(`${product.name} Added to cart!`, 'success');
     }
 
     return (
@@ -114,7 +145,7 @@ function ProductsListing(): React.JSX.Element {
                     <PantryBar/>
                     <PantrySpacer horizontal={false} space={20}/>
                     <FlatList
-                        data={categories}
+                        data={productCategories}
                         horizontal={true}
                         keyExtractor={(_, index) => index.toString()}
                         renderItem={({item}) => {
@@ -127,11 +158,11 @@ function ProductsListing(): React.JSX.Element {
                         }}
                     />
                     <PantrySpacer horizontal={false} space={20}/>
-                    <Text style={styles.selectionText}>Based on your selection</Text>
+                    <Text style={styles.selectionText}>{filteredProducts.length} Based on your selection</Text>
                     <Text style={styles.productsTitle}>Our products</Text>
                     <PantrySpacer horizontal={false} space={20}/>
                     <FlatList
-                        data={productList}
+                        data={filteredProducts}
                         numColumns={2}
                         columnWrapperStyle={styles.row}
                         renderItem={({item}) => {
@@ -157,11 +188,11 @@ interface FilterTileProps {
 
 function FilterTile(props: FilterTileProps): React.JSX.Element {
     return (
-        <TouchableWithoutFeedback onPress={() => {
+        <TouchableOpacity onPress={() => {
             props.onTap(props.title);
         }}>
             <Text style={props.selected ? styles.filterTextActive : styles.filterTextInactive}>{props.title}</Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
     );
 }
 
@@ -197,15 +228,15 @@ const styles = StyleSheet.create({
         fontFamily: sansBold,
         color: primaryColor,
         fontSize: 14,
-        paddingEnd: 10,
-        paddingStart: 10,
+        paddingEnd: 15,
+        paddingStart: 15,
     },
     filterTextInactive: {
         fontFamily: sansRegular,
         color: primaryColor,
         fontSize: 14,
-        paddingEnd: 10,
-        paddingStart: 10,
+        paddingEnd: 15,
+        paddingStart: 15,
     },
     selectionText: {
         fontSize: 12,

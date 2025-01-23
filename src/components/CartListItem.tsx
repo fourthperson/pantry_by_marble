@@ -1,12 +1,31 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {primaryColor, sansBold, sansRegular, serifBold, serifItalic} from '../config/theme.ts';
+import {
+    Image,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
+import {
+    primaryColor,
+    sansBold,
+    sansRegular,
+    serifBold,
+    serifItalic,
+} from '../config/theme.ts';
 import PantrySpacer from './PantrySpacer.tsx';
 import Icon from 'react-native-vector-icons/Feather';
-import {formatPrice, imageMapper} from '../util/util.ts';
+import {
+    formatPrice,
+    imageMapper,
+} from '../util/util.ts';
 import {CartItem} from '../types/types.ts';
 import {useDispatch} from 'react-redux';
-import {increaseQuantity, removeFromCart, subtractQuantity} from '../store/cart_slice';
+import {
+    increaseQuantity,
+    removeFromCart,
+    subtractQuantity,
+} from '../store/cart_slice';
 
 function CartListItem(item: CartItem): React.JSX.Element {
     const dispatch = useDispatch();
