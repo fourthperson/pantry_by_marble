@@ -6,12 +6,20 @@
       "sha1": "8fbe31a4a3bcabea094858800f94c70df6303eaa"
     },
     {
+      "path": "assets/fonts/AGaramondPro-BoldItalic.otf",
+      "sha1": "ade5844925dab51d6546d1aa363a28ccb628eef4"
+    },
+    {
       "path": "assets/fonts/AGaramondPro-Italic.otf",
-      "sha1": "20e900a564ec2ae4528535fd59a28c2a07ec2ae2"
+      "sha1": "dd2391189fda4db44c77e75e12a53873ec5ba68c"
     },
     {
       "path": "assets/fonts/AGaramondPro-Regular.otf",
-      "sha1": "211723d7471e07a637d844318f0c9ae61cce236d"
+      "sha1": "42c52792ab7f4e4b23c665714254e258997ae142"
+    },
+    {
+      "path": "assets/fonts/Avenir Black.ttf",
+      "sha1": "d3093f59c953062be216cafc1d857bef8fb7db47"
     },
     {
       "path": "assets/fonts/Avenir-Black.ttf",

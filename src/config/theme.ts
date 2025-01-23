@@ -9,8 +9,9 @@ export const checkOutBackground = '#ebeae5';
 // fonts
 export const serifRegular = 'Adobe Garamond Pro';
 export const serifBold = 'Adobe Garamond Pro Bold';
-// todo check italic
+// todo check italic font
 export const serifItalic = 'Adobe Garamond Pro Italic';
+export const serifBoldItalic = 'Adobe Garamond Pro Bold Italic';
 export const sansRegular = 'Avenir Roman';
 export const sansItalic = 'Avenir Oblique';
 // todo check bold font not working

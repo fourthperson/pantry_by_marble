@@ -50,9 +50,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>AGaramondPro-Bold.otf</string>
-		<string>AGaramondPro-Regular.otf</string>
 		<string>Avenir-Roman.ttf</string>
-		<string>AGaramondPro-Italic.otf</string>
 		<string>Avenir-Black.ttf</string>
 		<string>Avenir-Oblique.ttf</string>
 		<string>AntDesign.ttf</string>
@@ -78,6 +76,10 @@
 		<string>Avenir_95_Black.ttf</string>
 		<string>Geomanist-Medium.otf</string>
 		<string>AvenirLTStd-Heavy.otf</string>
+		<string>AGaramondPro-BoldItalic.otf</string>
+		<string>AGaramondPro-Italic.otf</string>
+		<string>AGaramondPro-Regular.otf</string>
+		<string>Avenir Black.ttf</string>
 	</array>
 </dict>
 </plist>

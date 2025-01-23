@@ -11,7 +11,7 @@ import {
     primaryColor,
     sansBold,
     sansRegular,
-    serifBold,
+    serifBold, serifBoldItalic,
 } from '../../config/theme.ts';
 import PantryTextInput, {PantryPhoneInput} from '../../components/PantryTextInput.tsx';
 import PantryButton from '../../components/PantryButton.tsx';
