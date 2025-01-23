@@ -36,6 +36,7 @@ function Home(): React.JSX.Element {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar,
+                animation: 'fade',
             }}>
             <Tab.Screen
                 name={routeProducts}

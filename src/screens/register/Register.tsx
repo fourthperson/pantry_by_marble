@@ -20,6 +20,8 @@ import PantryBackButton from '../../components/PantryBackButton.tsx';
 import PantryBar from '../../components/PantryBar.tsx';
 import {useNavigation} from '@react-navigation/native';
 import {routeHome} from '../../navigation/navigator.tsx';
+import {alertMsg} from '../../util/util.ts';
+import * as EmailValidator from 'email-validator';
 
 function RegisterScreen(): React.JSX.Element {
     const [fullName, setFullname] = useState('');
@@ -34,10 +36,31 @@ function RegisterScreen(): React.JSX.Element {
     }
 
     function validateInput() {
-        // todo vlidate input
         if (fullName === '') {
+            alertMsg('Enter your full name', 'warning');
             return;
         }
+        if (fullName.length < 3) {
+            alertMsg('Enter a valid full name', 'warning');
+            return;
+        }
+        if (emailAddress === '') {
+            alertMsg('Enter your email address', 'warning');
+            return;
+        }
+        if (!EmailValidator.validate(emailAddress)) {
+            alertMsg('Enter a valid email addres', 'warning');
+            return;
+        }
+        if (password === '') {
+            alertMsg('Set your password', 'warning');
+            return;
+        }
+        if (password.length < 8) {
+            alertMsg('Password should be at least 8 characters long', 'warning');
+            return;
+        }
+        navigation.push(routeHome);
     }
 
     return (

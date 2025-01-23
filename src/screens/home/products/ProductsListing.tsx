@@ -11,6 +11,7 @@ import PantryProductListItem from '../../../components/PantryProductListItem.tsx
 import {CartItem, PantryProduct} from '../../../types/types.ts';
 import {useDispatch} from 'react-redux';
 import {addToCart} from '../../../store/cart_slice';
+import {alertMsg} from '../../../util/util.ts';
 
 function ProductsListing(): React.JSX.Element {
     const navigation = useNavigation();
@@ -92,6 +93,7 @@ function ProductsListing(): React.JSX.Element {
             product: product,
         };
         dispatch(addToCart(cartItem));
+        alertMsg('Added to cart!', 'success');
     }
 
     return (

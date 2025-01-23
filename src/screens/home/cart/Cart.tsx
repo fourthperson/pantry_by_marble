@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {
     FlatList,
-    ScrollView,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
 } from 'react-native';
 import {
@@ -24,16 +24,16 @@ import {CartItem} from '../../../types/types.ts';
 import CartListItem from '../../../components/CartListItem.tsx';
 import {useSelector} from 'react-redux';
 import {formatPrice} from '../../../util/util.ts';
+import Icon from 'react-native-vector-icons/Feather';
 
 function Cart(): React.JSX.Element {
     const navigation = useNavigation();
 
     const cart = useSelector(state => state.cart);
-    console.log(cart);
 
     const [cartList, setCartList] = useState<Array<CartItem>>([]);
 
-    const deliveryFee = 28;
+    const deliveryFee = cartList.length === 0 ? 0 : 28;
 
     useEffect(() => {
         fillList();
@@ -68,7 +68,7 @@ function Cart(): React.JSX.Element {
                 </View>
                 <View style={[baseStyle.fillSpace]}>
                     {
-                        cartList && cartList.length > 0 &&
+                        cartList.length > 0 &&
                         <FlatList
                             data={cartList}
                             renderItem={({item}) => <CartListItem
@@ -76,6 +76,20 @@ function Cart(): React.JSX.Element {
                                 quantity={item.quantity}/>}
                             contentContainerStyle={styles.flatlistBottom}
                         />
+                    }
+                    {
+                        cartList.length === 0 &&
+                        <View style={styles.emptyGroup}>
+                            <Icon name={'shopping-cart'} color={'black'} size={30}/>
+                            <Text style={styles.emptyText}>
+                                There are no items in your cart
+                            </Text>
+                            <TouchableOpacity
+                                style={styles.backLink}
+                                onPress={() => navigation.goBack()}>
+                                <Text style={styles.backLinkText}>Add Items</Text>
+                            </TouchableOpacity>
+                        </View>
                     }
                 </View>
                 <View style={styles.checkoutGroup}>
@@ -171,7 +185,24 @@ const styles = StyleSheet.create({
     flatlistBottom: {
         paddingBottom: 200,
     },
-
+    emptyGroup: {
+        flex: 1,
+        marginTop: 100,
+        alignItems: 'center',
+        flexDirection: 'column',
+        width: '100%',
+    },
+    emptyText: {
+        fontSize: 14,
+        fontFamily: sansRegular,
+        margin: 20,
+    },
+    backLink: {},
+    backLinkText: {
+        fontFamily: sansBold,
+        fontSize: 14,
+        color: primaryColor,
+    },
 });
 
 export default Cart;

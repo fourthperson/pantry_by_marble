@@ -1,4 +1,6 @@
 import IMAGES from '../../assets/images';
+import {showMessage, MessageType} from 'react-native-flash-message';
+import {sansRegular} from '../config/theme.ts';
 
 export function imageMapper(index: number) {
     switch (index) {
@@ -14,9 +16,19 @@ export function imageMapper(index: number) {
 }
 
 export function formatPrice(p: number): string {
-    return `R ${p.toFixed(2).toString()}`;
+//    return `R ${p.toFixed(2).toString()}`;
+    return `R ${p.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
 }
 
-export function toastMessage(message: string) {
-
+export function alertMsg(message: string, type: MessageType, title?: string) {
+    showMessage({
+        message: title === undefined ? '' : title,
+        description: message,
+        type: type,
+        textStyle: {
+            fontFamily: sansRegular,
+            fontSize: 14,
+            color: 'white',
+        },
+    });
 }

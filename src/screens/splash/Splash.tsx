@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {Animated, StyleSheet, Text, View} from 'react-native';
 import {
     baseStyle,
     primaryColor,
@@ -12,17 +12,32 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 function SplashScreen(): React.JSX.Element {
     const navigation = useNavigation();
 
+    const fade: Animated.Value = useRef(new Animated.Value(0)).current;
+
+    function animation() {
+        Animated.timing(fade, {
+            toValue: 1,
+            duration: 2000,
+            useNativeDriver: true,
+        }).start();
+    }
+
     useEffect(() => {
+        animation();
         setTimeout(() => {
             navigation.replace(routeRegister);
-        }, 2000);
+        }, 2250);
     });
 
     return (
         <View style={baseStyle.bgContainer}>
             <SafeAreaView style={styles.centered}>
-                <Text style={styles.brandText}>Pantry</Text>
-                <Text style={styles.brandSubText}>by Marble</Text>
+                <Animated.Text style={[styles.brandText, {opacity: fade}]}>
+                    Pantry
+                </Animated.Text>
+                <Animated.Text style={[styles.brandSubText, {opacity: fade}]}>
+                    by Marble
+                </Animated.Text>
             </SafeAreaView>
         </View>
     );

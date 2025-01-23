@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {baseStyle, primaryColor, sansBold, sansRegular} from '../../../config/theme';
+import {baseStyle, primaryColor, sansRegular} from '../../../config/theme';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 function EmptyScreen(): React.JSX.Element {
