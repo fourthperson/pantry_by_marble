@@ -4,10 +4,12 @@ import {StyleSheet} from 'react-native';
 export const bgColor = '#FCF9F5';
 export const primaryColor = '#54634B';
 export const tabInactiveColor = '#999f91';
+export const checkOutBackground = '#ebeae5';
 
 // fonts
 export const serifRegular = 'Adobe Garamond Pro';
 export const serifBold = 'Adobe Garamond Pro Bold';
+// todo check italic
 export const serifItalic = 'Adobe Garamond Pro Italic';
 export const sansRegular = 'Avenir Roman';
 export const sansItalic = 'Avenir Oblique';

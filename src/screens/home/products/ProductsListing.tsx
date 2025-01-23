@@ -41,17 +41,24 @@ function ProductsListing(): React.JSX.Element {
     }, []);
 
     function toggleCategory(cat: string) {
-        let modded = selectedCategories;
+        let modded: Array<string> = selectedCategories;
         if (modded.includes(cat)) {
             // remove
             const index: number = modded.indexOf(cat);
             if (index > -1) {
-                modded = selectedCategories.splice(index);
-                setSelectedCategories(modded);
+                modded = modded.splice(index);
             }
         } else {
-            // add
-            modded.push(cat);
+            if (cat === categories[0]) {
+                // all category selected
+                // remove all others
+                modded = [];
+                // add all
+                modded.push(categories[0]);
+            } else {
+                // add new category
+                modded.push(cat);
+            }
         }
         if (modded.length === 0) {
             modded.push('All');
@@ -60,7 +67,7 @@ function ProductsListing(): React.JSX.Element {
             // remove all if length > 1 and includes all
             modded.splice(selectedCategories.indexOf(categories[0]));
         }
-        setSelectedCategories([...modded]);
+        setSelectedCategories(modded);
     }
 
     function getRandomInt(min: number, max: number): number {

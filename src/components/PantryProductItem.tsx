@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Image,
-    ImageSourcePropType,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -11,12 +10,12 @@ import PantrySpacer from './PantrySpacer.tsx';
 import {
     baseStyle,
     primaryColor,
-    productImages,
     sansBold,
     sansRegular,
 } from '../config/theme.ts';
 import Icon from 'react-native-vector-icons/Feather';
 import {PantryProduct} from '../types/PantryProduct.ts';
+import {imageMapper} from '../util/util.ts';
 
 interface PantryProductProps {
     product: PantryProduct
@@ -28,13 +27,11 @@ function PantryProductItem(props: PantryProductProps): React.JSX.Element {
         return `R ${p.toFixed(2).toString()}`;
     }
 
-    const imageSource = productImages[`${props.product.image}`] as ImageSourcePropType;
-
     return (
         <View>
             <Image
                 style={styles.image}
-                source={imageSource}
+                source={imageMapper(props.product.image)}
             />
             <PantrySpacer horizontal={false} space={20}/>
             <Text style={styles.nameText}>{props.product.name}</Text>

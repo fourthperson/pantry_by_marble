@@ -1,0 +1,163 @@
+import React, {useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {primaryColor, sansBold, sansRegular, serifBold, serifItalic} from '../config/theme.ts';
+import {PantryProduct} from '../types/PantryProduct.ts';
+import PantrySpacer from './PantrySpacer.tsx';
+import Icon from 'react-native-vector-icons/Feather';
+import {imageMapper} from '../util/util.ts';
+
+interface CartItemProps {
+    product: PantryProduct;
+    quantity: number;
+}
+
+function CartItem(props: CartItemProps): React.JSX.Element {
+    const [count, setCount] = useState<number>(props.quantity);
+
+    function add() {
+        console.log(`Adding ${count}`);
+        setCount(count + 1);
+    }
+
+    function sub() {
+        if (count > 1) {
+            setCount(prev => prev - 1);
+        }
+    }
+
+    function formatPrice(p: number): string {
+        return `R ${p.toFixed(2).toString()}`;
+    }
+
+    function remove() {
+    }
+
+    return (
+        <View style={[styles.container]}>
+            <Image
+                style={styles.image}
+                source={imageMapper(props.product.image)}/>
+            <PantrySpacer horizontal={true} space={20}/>
+            <View style={{paddingVertical: 16, justifyContent: 'space-around'}}>
+                <Text
+                    numberOfLines={2}
+                    style={styles.nameStyle}>
+                    {
+                        props.product.name.toUpperCase()
+                    }
+                </Text>
+                <Text
+                    numberOfLines={1}
+                    style={styles.nameStyle}>
+                    {
+                        formatPrice(props.product.price)
+                    }
+                </Text>
+                <View style={styles.actionGroup}>
+                    <RemoveButton onTap={remove}/>
+                    <PantrySpacer horizontal={true} space={20}/>
+                    <QuantityButton positive={false} onTap={sub}/>
+                    <PantrySpacer horizontal={true} space={10}/>
+                    <Text style={styles.quantityText}>
+                        {count.toString()}
+                    </Text>
+                    <PantrySpacer horizontal={true} space={10}/>
+                    <QuantityButton positive={true} onTap={add}/>
+                </View>
+            </View>
+        </View>
+    );
+}
+
+
+interface QuantityButtonProps {
+    onTap: () => void;
+    positive: boolean;
+}
+
+function QuantityButton(props: QuantityButtonProps): React.JSX.Element {
+    return (
+        <TouchableOpacity onPress={props.onTap}>
+            <View style={styles.seekButton}>
+                <Icon
+                    name={props.positive ? 'plus' : 'minus'}
+                    color={primaryColor}
+                    size={15}/>
+            </View>
+        </TouchableOpacity>
+    );
+}
+
+interface RemoveButtonProps {
+    onTap: () => void;
+}
+
+function RemoveButton(props: RemoveButtonProps): React.JSX.Element {
+    return (
+        <TouchableOpacity onPress={props.onTap}>
+            <View style={styles.removeButton}>
+                <Text style={styles.buttonLabel}>Remove</Text>
+            </View>
+        </TouchableOpacity>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        paddingStart: 16,
+        paddingEnd: 16,
+        marginBottom: 10,
+    },
+    image: {
+        height: 126,
+        width: 133,
+    },
+    nameStyle: {
+        fontFamily: serifItalic,
+        fontSize: 16,
+        color: primaryColor,
+        lineHeight: 18,
+    },
+    priceStyle: {
+        fontFamily: serifBold,
+        fontSize: 16,
+        color: primaryColor,
+        lineHeight: 18,
+    },
+    actionGroup: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
+    removeButton: {
+        borderColor: primaryColor,
+        borderWidth: 1.5,
+        borderRadius: 20,
+        paddingHorizontal: 5,
+    },
+    seekButton: {
+        borderColor: primaryColor,
+        borderWidth: 1.5,
+        borderRadius: 15,
+        paddingHorizontal: 5,
+        height: 30,
+        width: 30,
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    buttonLabel: {
+        fontFamily: sansRegular,
+        fontSize: 14,
+        padding: 5,
+        color: primaryColor,
+    },
+    quantityText: {
+        // todo geomnast
+        fontFamily: sansBold,
+        color: primaryColor,
+        fontSize: 18,
+    },
+});
+
+export default CartItem;
