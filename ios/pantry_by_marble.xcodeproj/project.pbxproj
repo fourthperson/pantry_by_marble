@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-pantry_by_marble.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-pantry_by_marble.a */; };
+		10383F78327E4C0B849A2703 /* Adobe Garamond Pro Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */; };
 		11B923AD51E942EE91DB07D6 /* Avenir Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFACA685094E4987AE36EA69 /* Avenir Black.ttf */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D4CEA793BE14BD88A228E5E /* Avenir Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4326E76FC90454081F187F8 /* Avenir Heavy.ttf */; };
@@ -20,7 +21,6 @@
 		A83A29782637412CB12BBE3C /* Adobe Garamond Pro Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF838A8C154F5CB0CB3CA9 /* Adobe Garamond Pro Bold.otf */; };
 		BC672DC185244EBABFD00A82 /* Avenir Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D50CE2F01D140A6BAD7D06D /* Avenir Roman.ttf */; };
 		E0BF342F206E48979BA1141D /* Geomanist Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5676A9CB9E384170BD25F679 /* Geomanist Medium.otf */; };
-		10383F78327E4C0B849A2703 /* Adobe Garamond Pro Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +30,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = pantry_by_marble/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = pantry_by_marble/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = pantry_by_marble/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Adobe Garamond Pro Bold Italic.otf"; path = "../assets/fonts/Adobe Garamond Pro Bold Italic.otf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-pantry_by_marble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry_by_marble.debug.xcconfig"; path = "Target Support Files/Pods-pantry_by_marble/Pods-pantry_by_marble.debug.xcconfig"; sourceTree = "<group>"; };
 		4D50CE2F01D140A6BAD7D06D /* Avenir Roman.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir Roman.ttf"; path = "../assets/fonts/Avenir Roman.ttf"; sourceTree = "<group>"; };
 		5676A9CB9E384170BD25F679 /* Geomanist Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Geomanist Medium.otf"; path = "../assets/fonts/Geomanist Medium.otf"; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		C4326E76FC90454081F187F8 /* Avenir Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir Heavy.ttf"; path = "../assets/fonts/Avenir Heavy.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FDA960D3E77A4AAD86CC39E7 /* Adobe Garamond Pro.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Adobe Garamond Pro.otf"; path = "../assets/fonts/Adobe Garamond Pro.otf"; sourceTree = "<group>"; };
-		31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */ = {isa = PBXFileReference; name = "Adobe Garamond Pro Bold Italic.otf"; path = "../assets/fonts/Adobe Garamond Pro Bold Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

@@ -123,7 +123,11 @@ function PantryAppNavigator(): React.JSX.Element {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                screenOptions={{headerShown: false}}
+                screenOptions={{
+                    headerShown: false,
+                    gestureEnabled: true,
+                    fullScreenGestureEnabled: false,
+                }}
                 initialRouteName={routeSplash}>
                 <Stack.Screen
                     name={routeSplash}

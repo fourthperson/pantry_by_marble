@@ -1,11 +1,13 @@
 import React, {useEffect, useRef} from 'react';
 import {
-    Animated, StatusBar,
+    Animated,
+    StatusBar,
     StyleSheet,
     View,
 } from 'react-native';
 import {
-    baseStyle, bgColor,
+    baseStyle,
+    bgColor,
     primaryColor,
     serifBold,
 } from '../../config/theme.ts';

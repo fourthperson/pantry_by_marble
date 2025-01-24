@@ -21,6 +21,7 @@
     "react-i18next": "^15.4.0",
     "react-native": "0.77.0",
     "react-native-flash-message": "^0.4.2",
+    "react-native-gesture-handler": "^2.22.1",
     "react-native-localize": "^3.4.1",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "^4.5.0",

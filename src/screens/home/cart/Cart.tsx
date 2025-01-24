@@ -7,12 +7,14 @@ import {
     View,
 } from 'react-native';
 import {
-    baseStyle, bgColor,
+    baseStyle,
+    bgColor,
     checkOutBackground,
     primaryColor,
     sansBold,
     sansRegular,
-    serifBold, serifBoldItalic,
+    serifBold,
+    serifBoldItalic,
 } from '../../../config/theme';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PantryBackButton from '../../../components/PantryBackButton.tsx';

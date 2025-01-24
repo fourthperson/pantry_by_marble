@@ -27,7 +27,9 @@ function PromoCodeComponent(): React.JSX.Element {
                         placeholder={t('add_promo_code')}
                         placeholderTextColor={primaryColor}
                         selectionColor={primaryColor}
-                        style={styles.addStyle}/>
+                        style={styles.addStyle}
+                        autoCapitalize={'characters'}
+                        keyboardType={'default'}/>
                 </View>
                 <View style={styles.divider}/>
                 <TouchableOpacity>
