@@ -26,6 +26,7 @@ import {
     removeFromCart,
     subtractQuantity,
 } from '../store/cart_slice';
+import {useTranslation} from 'react-i18next';
 
 function CartListItem(item: CartItem): React.JSX.Element {
     const dispatch = useDispatch();
@@ -109,10 +110,12 @@ interface RemoveButtonProps {
 }
 
 function RemoveButton(props: RemoveButtonProps): React.JSX.Element {
+    const {t} = useTranslation();
+
     return (
         <TouchableOpacity onPress={props.onTap}>
             <View style={styles.removeButton}>
-                <Text style={styles.buttonLabel}>Remove</Text>
+                <Text style={styles.buttonLabel}>{t('remove')}</Text>
             </View>
         </TouchableOpacity>
     );

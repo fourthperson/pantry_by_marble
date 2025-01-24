@@ -15,7 +15,6 @@ import {
     sansBold,
     sansRegular,
     serifBold,
-    serifBoldItalic,
 } from '../../../config/theme.ts';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -35,15 +34,24 @@ import {
 } from '../../../util/util.ts';
 import {
     numberOfProducts,
-    productCategories,
     productImages,
 } from '../../../config/constants.ts';
+import {useTranslation} from 'react-i18next';
 
 function Products(): React.JSX.Element {
     const navigation = useNavigation();
 
     const dispatch = useDispatch();
 
+    const {t} = useTranslation();
+
+    const productCategories = [
+        t('category_all'),
+        t('category_beef'),
+        t('category_fish'),
+        t('category_pork'),
+        t('category_poultry'),
+    ];
     const categoryAll = productCategories[0];
 
     const [productList, setProductList] = useState<Array<PantryProduct>>([]);
@@ -142,15 +150,15 @@ function Products(): React.JSX.Element {
             <SafeAreaView style={styles.container}>
                 <View style={styles.topGroup}>
                     <View style={styles.navRow}>
-                        <PantryBackButton label={'Back'} onPress={navigation.goBack}/>
+                        <PantryBackButton label={t('back')} onPress={navigation.goBack}/>
                         <View style={styles.filterGroup}>
-                            <Text style={styles.filterText}>Filter</Text>
+                            <Text style={styles.filterText}>{t('filter')}</Text>
                             <PantrySpacer horizontal={true} space={10}/>
                             <Icon name={'sliders'} color={primaryColor} size={20}/>
                         </View>
                     </View>
                     <PantrySpacer horizontal={false} space={30}/>
-                    <Text style={styles.titleText}>Meat</Text>
+                    <Text style={styles.titleText}>{t('title_meat')}</Text>
                     <PantrySpacer horizontal={false} space={10}/>
                     <PantryBar/>
                     <PantrySpacer horizontal={false} space={20}/>
@@ -179,9 +187,10 @@ function Products(): React.JSX.Element {
                                     }}
                                 />
                                 <PantrySpacer horizontal={false} space={20}/>
-                                <Text style={styles.selectionText}>{filteredProducts.length} Based on your
-                                    selection</Text>
-                                <Text style={styles.productsTitle}>Our products</Text>
+                                <Text style={styles.selectionText}>
+                                    {filteredProducts.length}{t('based_on_your_selection')}
+                                </Text>
+                                <Text style={styles.productsTitle}>{t('title_our_products')}</Text>
                                 <PantrySpacer horizontal={false} space={20}/>
                                 <FlatList
                                     data={filteredProducts}

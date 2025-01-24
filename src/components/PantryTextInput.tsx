@@ -21,7 +21,6 @@ export interface PantryTextInputprops {
     onTextChanged: (s: string) => void;
     keyboardType: KeyboardTypeOptions;
     isPasswordField: boolean;
-    onDone: () => void;
 }
 
 function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {

@@ -6,6 +6,7 @@ import {
     isPossibleNumber,
     isValidPhoneNumber,
 } from 'libphonenumber-js';
+import {defaultCurrency} from '../config/constants.ts';
 
 export function getRandomInt(min: number, max: number): number {
     min = Math.ceil(min);
@@ -28,7 +29,7 @@ export function imageMapper(index: number) {
 
 export function formatPrice(p: number): string {
 //    return `R ${p.toFixed(2).toString()}`;
-    return `R ${p.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+    return `${defaultCurrency} ${p.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
 }
 
 export function alertMsg(message: string, type: MessageType, title?: string) {

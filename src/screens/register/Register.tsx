@@ -26,9 +26,11 @@ import {
     defaultCountryCallingCode,
     defaultCountryCode,
 } from '../../config/constants.ts';
+import {useTranslation} from 'react-i18next';
 
 function RegisterScreen(): React.JSX.Element {
     const navigation = useNavigation();
+    const {t} = useTranslation();
 
     const [fullName, setFullname] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
@@ -41,35 +43,35 @@ function RegisterScreen(): React.JSX.Element {
 
     function validateInput() {
         if (fullName === '') {
-            alertMsg('Enter your full name', 'warning');
+            alertMsg(t('validation_empty_name'), 'warning');
             return;
         }
         if (fullName.length < 3) {
-            alertMsg('Enter a valid full name', 'warning');
+            alertMsg(t('validation_invalid_name'), 'warning');
             return;
         }
         if (emailAddress === '') {
-            alertMsg('Enter your email address', 'warning');
+            alertMsg(t('validation_empty_email'), 'warning');
             return;
         }
         if (!EmailValidator.validate(emailAddress)) {
-            alertMsg('Enter a valid email addres', 'warning');
+            alertMsg(t('validation_invalid_email'), 'warning');
             return;
         }
         if (mobileNumber === '') {
-            alertMsg('Entre your mobile number', 'warning');
+            alertMsg(t('validation_empty_phone'), 'warning');
             return;
         }
         if (!validPhone(mobileNumber, defaultCountryCode)) {
-            alertMsg('Entre a valid mobile number', 'warning');
+            alertMsg(t('validation_invalid_phone'), 'warning');
             return;
         }
         if (password === '') {
-            alertMsg('Set your password', 'warning');
+            alertMsg(t('validation_empty_password'), 'warning');
             return;
         }
         if (password.length < 8) {
-            alertMsg('Password should be at least 8 characters long', 'warning');
+            alertMsg(t('validation_invalid_password'), 'warning');
             return;
         }
         navigation.push(routeHome);
@@ -86,49 +88,49 @@ function RegisterScreen(): React.JSX.Element {
                         </View>
                         <View style={styles.exploreBar}>
                             <Text style={styles.exploreText}>
-                                Explore app
+                                {t('explore_app')}
                             </Text>
                         </View>
                         <Text style={styles.welcomeText}>
-                            Welcome to{'\n'}Pantry by Marble
+                            {t('welcome_to_app')}
                         </Text>
                         <Text style={styles.rationaleText}>
-                            Sign up for easy payment, collection{'\n'}and much more
+                            {t('sign_up_rationale')}
                         </Text>
                         <PantryBar/>
                         <PantrySpacer space={75} horizontal={false}/>
                         <PantryTextInput
-                            label={'Full Name'}
+                            label={t('label_full_name')}
                             value={fullName}
                             onTextChanged={setFullname}
                             keyboardType={'default'}
                             isPasswordField={false}/>
                         <PantryTextInput
-                            label={'Email'}
+                            label={t('label_email')}
                             value={emailAddress}
                             onTextChanged={setEmailAddress}
                             keyboardType={'email-address'}
                             isPasswordField={false}/>
                         <PantryPhoneInput
-                            label={'Mobile Number'}
+                            label={t('label_mobile_number')}
                             prefix={defaultCountryCallingCode}
                             value={mobileNumber}
                             onTextChanged={setMobileNumber}
                             keyboardType={'phone-pad'}/>
                         <PantryTextInput
-                            label={'Create password'}
+                            label={t('label_password')}
                             value={password}
                             onTextChanged={setPassword}
                             keyboardType={'default'}
                             isPasswordField={true}/>
                         <PantryButton
-                            label={'Sign up'}
+                            label={t('label_sign_up')}
                             onPress={validateInput}/>
                         <PantrySpacer horizontal={false} space={20}/>
                         <View style={styles.loginRow}>
                             <Text style={styles.loginQuestion}>Have an account?</Text>
                             <PantrySpacer space={5} horizontal={true}/>
-                            <Text style={styles.loginText}>Log In</Text>
+                            <Text style={styles.loginText}>{t('label_login')}</Text>
                         </View>
                         <PantrySpacer horizontal={false} space={20}/>
                         <View style={styles.orRow}>
@@ -138,14 +140,14 @@ function RegisterScreen(): React.JSX.Element {
                         </View>
                         <PantrySpacer horizontal={false} space={20}/>
                         <PantryButton
-                            label={'Explore our app'}
+                            label={t('explore_our_app')}
                             onPress={home}/>
                         <PantrySpacer horizontal={false} space={20}/>
                         <Text style={styles.terms}>
-                            <Text style={styles.termsText}>By signing up you agree to our </Text>
-                            <Text style={styles.termsLink}>Terms, Data Policy</Text>
-                            <Text style={styles.termsText}> and </Text>
-                            <Text style={styles.termsLink}>Cookies Policy</Text>
+                            <Text style={styles.termsText}>{t('label_terms_1')}</Text>
+                            <Text style={styles.termsLink}>{t('label_terms_2')}</Text>
+                            <Text style={styles.termsText}>{t('label_terms_3')}</Text>
+                            <Text style={styles.termsLink}>{t('label_terms_4')}</Text>
                         </Text>
                         <PantrySpacer horizontal={false} space={20}/>
                     </View>

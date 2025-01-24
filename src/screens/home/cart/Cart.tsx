@@ -7,7 +7,7 @@ import {
     View,
 } from 'react-native';
 import {
-    baseStyle,
+    baseStyle, bgColor,
     checkOutBackground,
     primaryColor,
     sansBold,
@@ -20,14 +20,18 @@ import PantrySpacer from '../../../components/PantrySpacer.tsx';
 import {useNavigation} from '@react-navigation/native';
 import PantryBar from '../../../components/PantryBar.tsx';
 import PantryButton from '../../../components/PantryButton.tsx';
+import PromoCodeComponent from '../../../components/PromoCodeComponent.tsx';
 import {CartItem} from '../../../types/types.ts';
 import CartListItem from '../../../components/CartListItem.tsx';
 import {useSelector} from 'react-redux';
 import {formatPrice} from '../../../util/util.ts';
 import Icon from 'react-native-vector-icons/Feather';
+import {useTranslation} from 'react-i18next';
 
 function Cart(): React.JSX.Element {
     const navigation = useNavigation();
+
+    const {t} = useTranslation();
 
     const cart = useSelector(state => state.cart);
 
@@ -58,10 +62,10 @@ function Cart(): React.JSX.Element {
             <SafeAreaView style={baseStyle.fillSpace}>
                 <View style={styles.headerGroup}>
                     <View style={styles.navRow}>
-                        <PantryBackButton label={'Back'} onPress={navigation.goBack}/>
+                        <PantryBackButton label={t('back')} onPress={navigation.goBack}/>
                     </View>
                     <PantrySpacer horizontal={false} space={30}/>
-                    <Text style={styles.titleText}>Cart</Text>
+                    <Text style={styles.titleText}>{t('title_cart')}</Text>
                     <PantrySpacer horizontal={false} space={10}/>
                     <PantryBar/>
                     <PantrySpacer horizontal={false} space={10}/>
@@ -82,27 +86,31 @@ function Cart(): React.JSX.Element {
                         <View style={styles.emptyGroup}>
                             <Icon name={'shopping-cart'} color={'black'} size={30}/>
                             <Text style={styles.emptyText}>
-                                There are no items in your cart
+                                {t('cart_empty')}
                             </Text>
-                            <TouchableOpacity
-                                style={styles.backLink}
-                                onPress={() => navigation.goBack()}>
-                                <Text style={styles.backLinkText}>Add Items</Text>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <Text style={styles.backLinkText}>{t('add_items')}</Text>
                             </TouchableOpacity>
                         </View>
                     }
                 </View>
-                <View style={styles.checkoutGroup}>
-                    <CheckoutTally label={'Sub total'} value={formatPrice(cart.total)}/>
-                    <CheckoutTally label={'Delivery'} value={formatPrice(deliveryFee)}/>
-                    <View style={styles.checkoutDivider}/>
-                    <CheckoutTotal label={'Total'} value={formatPrice(cart.total + deliveryFee)}/>
-                    <PantrySpacer horizontal={false} space={20}/>
-                    <PantryButton label={'Checkout'} onPress={checkout}/>
+                <View style={styles.bottomGroup}>
+                    <View style={styles.promoGroup}>
+                        <PromoCodeComponent/>
+                    </View>
+                    <View style={styles.checkoutGroup}>
+                        <CheckoutTally label={t('sub_total')} value={formatPrice(cart.total)}/>
+                        <CheckoutTally label={t('delivery')} value={formatPrice(deliveryFee)}/>
+                        <View style={styles.checkoutDivider}/>
+                        <CheckoutTotal label={t('total')} value={formatPrice(cart.total + deliveryFee)}/>
+                        <PantrySpacer horizontal={false} space={10}/>
+                        <PantryButton label={t('checkout')} onPress={checkout}/>
+                    </View>
                 </View>
             </SafeAreaView>
         </View>
-    );
+    )
+        ;
 }
 
 
@@ -144,14 +152,21 @@ const styles = StyleSheet.create({
         lineHeight: 50,
         fontSize: 40,
     },
-    checkoutGroup: {
+    promoGroup: {
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+    },
+    bottomGroup: {
+        backgroundColor: bgColor,
         position: 'absolute',
         bottom: 0,
         right: 0,
         left: 0,
+    },
+    checkoutGroup: {
         backgroundColor: checkOutBackground,
         paddingHorizontal: 16,
-        paddingVertical: 20,
+        paddingVertical: 10,
     },
     checkoutRow: {
         flexDirection: 'row',
@@ -183,7 +198,7 @@ const styles = StyleSheet.create({
         color: primaryColor,
     },
     flatlistBottom: {
-        paddingBottom: Platform.OS === 'ios' ? 200 : 250,
+        paddingBottom: Platform.OS === 'ios' ? 230 : 280,
     },
     emptyGroup: {
         flex: 1,
