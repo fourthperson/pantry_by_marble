@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {
     primaryColor,
-    sansBold,
+    sansBoldAlt,
     sansRegular,
     serifBold,
     serifItalic,
@@ -173,10 +173,9 @@ const styles = StyleSheet.create({
         color: primaryColor,
     },
     quantityText: {
-        // todo geomnast
-        fontFamily: sansBold,
+        fontFamily: sansBoldAlt,
         color: primaryColor,
-        fontSize: 18,
+        fontSize: 16,
     },
 });
 

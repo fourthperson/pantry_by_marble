@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     KeyboardTypeOptions,
+    Platform,
     StyleSheet,
     Text,
     TextInput,
@@ -20,6 +21,7 @@ export interface PantryTextInputprops {
     onTextChanged: (s: string) => void;
     keyboardType: KeyboardTypeOptions;
     isPasswordField: boolean;
+    onDone: () => void;
 }
 
 function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {
@@ -42,6 +44,7 @@ function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {
                     <TextInput
                         style={styles.inputStyle}
                         value={value}
+                        onEndEditing={props.onDone}
                         selectionColor={primaryColor}
                         autoCapitalize="none"
                         onChangeText={setValue}
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
     divider: {
         backgroundColor: primaryColor,
         height: 1,
-        marginTop: 7.5,
+        marginTop: Platform.OS === 'ios' ? 7.5 : 2,
     },
     spacer: {
         height: 30,

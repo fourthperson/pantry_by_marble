@@ -2,19 +2,19 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "assets/fonts/AGaramondPro-Bold.otf",
-      "sha1": "8fbe31a4a3bcabea094858800f94c70df6303eaa"
-    },
-    {
-      "path": "assets/fonts/AGaramondPro-BoldItalic.otf",
+      "path": "assets/fonts/Adobe Garamond Pro Bold Italic.otf",
       "sha1": "ade5844925dab51d6546d1aa363a28ccb628eef4"
     },
     {
-      "path": "assets/fonts/AGaramondPro-Italic.otf",
+      "path": "assets/fonts/Adobe Garamond Pro Bold.otf",
+      "sha1": "8fbe31a4a3bcabea094858800f94c70df6303eaa"
+    },
+    {
+      "path": "assets/fonts/Adobe Garamond Pro Italic.otf",
       "sha1": "dd2391189fda4db44c77e75e12a53873ec5ba68c"
     },
     {
-      "path": "assets/fonts/AGaramondPro-Regular.otf",
+      "path": "assets/fonts/Adobe Garamond Pro.otf",
       "sha1": "42c52792ab7f4e4b23c665714254e258997ae142"
     },
     {
@@ -22,31 +22,19 @@
       "sha1": "d3093f59c953062be216cafc1d857bef8fb7db47"
     },
     {
-      "path": "assets/fonts/Avenir-Black.ttf",
-      "sha1": "8785410d05803e43992bc9d0b44cbaabaa72ef9b"
+      "path": "assets/fonts/Avenir Heavy.ttf",
+      "sha1": "1fbd4266a5431ab123f91d292b70d0a858138770"
     },
     {
-      "path": "assets/fonts/Avenir-Oblique.ttf",
-      "sha1": "1d6e24bdacb160df49f47d91b160ed8f3b64d60f"
+      "path": "assets/fonts/Avenir LT Std 95 Black.otf",
+      "sha1": "eb534ac4079db239cdd489df7a1aa2b874b5b599"
     },
     {
-      "path": "assets/fonts/Avenir-Roman.ttf",
+      "path": "assets/fonts/Avenir Roman.ttf",
       "sha1": "758723a68b2480466c95a1e090f5be8eafbd5817"
     },
     {
-      "path": "assets/fonts/AvenirLTStd-Heavy.otf",
-      "sha1": "bf135f69c60771d3e70ac6fe0d608994ec43b1a2"
-    },
-    {
-      "path": "assets/fonts/Avenir_85_Heavy.ttf",
-      "sha1": "0b9177b4624184f8e164288d978199e05ee7df8e"
-    },
-    {
-      "path": "assets/fonts/Avenir_95_Black.ttf",
-      "sha1": "387ca6017255558a1e04f1f19eebbda5aa56682a"
-    },
-    {
-      "path": "assets/fonts/Geomanist-Medium.otf",
+      "path": "assets/fonts/Geomanist Medium.otf",
       "sha1": "f8b74a25b5ad2279e5c4688d79cb77b06b9e3179"
     }
   ]

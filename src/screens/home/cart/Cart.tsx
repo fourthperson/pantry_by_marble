@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-    FlatList,
+    FlatList, Platform,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -12,7 +12,7 @@ import {
     primaryColor,
     sansBold,
     sansRegular,
-    serifBold,
+    serifBold, serifBoldItalic,
 } from '../../../config/theme';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PantryBackButton from '../../../components/PantryBackButton.tsx';
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     titleText: {
-        fontFamily: serifBold,
+        fontFamily: serifBoldItalic,
         color: primaryColor,
         lineHeight: 50,
         fontSize: 40,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         color: primaryColor,
     },
     flatlistBottom: {
-        paddingBottom: 200,
+        paddingBottom: Platform.OS === 'ios' ? 200 : 250,
     },
     emptyGroup: {
         flex: 1,
@@ -197,7 +197,6 @@ const styles = StyleSheet.create({
         fontFamily: sansRegular,
         margin: 20,
     },
-    backLink: {},
     backLinkText: {
         fontFamily: sansBold,
         fontSize: 14,

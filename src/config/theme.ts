@@ -7,16 +7,17 @@ export const tabInactiveColor = '#999f91';
 export const checkOutBackground = '#ebeae5';
 
 // fonts
+// serif
 export const serifRegular = 'Adobe Garamond Pro';
 export const serifBold = 'Adobe Garamond Pro Bold';
 // todo check italic font
 export const serifItalic = 'Adobe Garamond Pro Italic';
 export const serifBoldItalic = 'Adobe Garamond Pro Bold Italic';
+// sans
 export const sansRegular = 'Avenir Roman';
-export const sansItalic = 'Avenir Oblique';
 // todo check bold font not working
-export const sansBold = 'Geomanist Medium';
-//export const sansBold = 'Avenir LT Std 85 Heavy';
+export const sansBold = 'Avenir LT Std 95 Black';
+export const sansBoldAlt = 'Geomanist Medium';
 
 
 export const baseStyle = StyleSheet.create({
@@ -28,10 +29,3 @@ export const baseStyle = StyleSheet.create({
     flex: 1,
   },
 });
-
-//export const productImages = {
-//  0: require('../../assets/images/1.jpeg'),
-//  1: require('../../assets/images/2.jpeg'),
-//  2: require('../../assets/images/3.jpeg'),
-//  3: require('../../assets/images/4.jpeg'),
-//};

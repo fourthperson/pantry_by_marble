@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
     ScrollView,
     StyleSheet,
@@ -11,7 +11,7 @@ import {
     primaryColor,
     sansBold,
     sansRegular,
-    serifBold, serifBoldItalic,
+    serifBoldItalic,
 } from '../../config/theme.ts';
 import PantryTextInput, {PantryPhoneInput} from '../../components/PantryTextInput.tsx';
 import PantryButton from '../../components/PantryButton.tsx';
@@ -28,12 +28,12 @@ import {
 } from '../../config/constants.ts';
 
 function RegisterScreen(): React.JSX.Element {
+    const navigation = useNavigation();
+
     const [fullName, setFullname] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
-
-    const navigation = useNavigation();
 
     function home() {
         navigation.push(routeHome);
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     },
     welcomeText: {
         color: primaryColor,
-        fontFamily: serifBold,
+        fontFamily: serifBoldItalic,
         fontSize: 40,
         lineHeight: 50,
     },

@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {
+    ActivityIndicator,
     FlatList,
+    Platform,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -13,6 +15,7 @@ import {
     sansBold,
     sansRegular,
     serifBold,
+    serifBoldItalic,
 } from '../../../config/theme.ts';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -26,14 +29,17 @@ import {
 } from '../../../types/types.ts';
 import {useDispatch} from 'react-redux';
 import {addToCart} from '../../../store/cart_slice';
-import {alertMsg, getRandomInt} from '../../../util/util.ts';
+import {
+    alertMsg,
+    getRandomInt,
+} from '../../../util/util.ts';
 import {
     numberOfProducts,
     productCategories,
     productImages,
 } from '../../../config/constants.ts';
 
-function ProductsListing(): React.JSX.Element {
+function Products(): React.JSX.Element {
     const navigation = useNavigation();
 
     const dispatch = useDispatch();
@@ -44,6 +50,8 @@ function ProductsListing(): React.JSX.Element {
     const [filteredProducts, setFilteredProducts] = useState<Array<PantryProduct>>([]);
 
     const [selectedCategories, setSelectedCategories] = useState([categoryAll]);
+
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         populateProducts();
@@ -87,7 +95,7 @@ function ProductsListing(): React.JSX.Element {
                     array.splice(index, 1);
                 }
             } else {
-                // add
+                // add category
                 array.push(cat);
             }
             if (array.length === 0) {
@@ -100,6 +108,7 @@ function ProductsListing(): React.JSX.Element {
     }
 
     function filterProductsByCategory() {
+        setIsLoading(true);
         if (selectedCategories.length === 1 && selectedCategories[0] === categoryAll) {
             // clear filters
             setFilteredProducts([...productList]);
@@ -116,6 +125,7 @@ function ProductsListing(): React.JSX.Element {
             }
             setFilteredProducts(matches);
         }
+        setIsLoading(false);
     }
 
     function dispatchAddToCart(product: PantryProduct) {
@@ -144,37 +154,51 @@ function ProductsListing(): React.JSX.Element {
                     <PantrySpacer horizontal={false} space={10}/>
                     <PantryBar/>
                     <PantrySpacer horizontal={false} space={20}/>
-                    <FlatList
-                        data={productCategories}
-                        horizontal={true}
-                        keyExtractor={(_, index) => index.toString()}
-                        renderItem={({item}) => {
-                            return (
-                                <FilterTile
-                                    title={item}
-                                    selected={selectedCategories.includes(item)}
-                                    onTap={(s) => toggleCategory(s)}/>
-                            );
-                        }}
-                    />
-                    <PantrySpacer horizontal={false} space={20}/>
-                    <Text style={styles.selectionText}>{filteredProducts.length} Based on your selection</Text>
-                    <Text style={styles.productsTitle}>Our products</Text>
-                    <PantrySpacer horizontal={false} space={20}/>
-                    <FlatList
-                        data={filteredProducts}
-                        numColumns={2}
-                        columnWrapperStyle={styles.row}
-                        renderItem={({item}) => {
-                            return (
-                                <PantryProductListItem
-                                    product={item}
-                                    onCartPress={() => dispatchAddToCart(item)}
-                                />
-                            );
-                        }}
-                        contentContainerStyle={styles.flatlistBottom}/>
                 </View>
+                {
+                    isLoading ?
+                        (
+                            <View style={styles.loaderContainer}>
+                                <ActivityIndicator color={primaryColor}/>
+                            </View>
+                        )
+                        :
+                        (
+                            <View>
+                                <FlatList
+                                    data={productCategories}
+                                    horizontal={true}
+                                    keyExtractor={(_, index) => index.toString()}
+                                    renderItem={({item}) => {
+                                        return (
+                                            <FilterTile
+                                                title={item}
+                                                selected={selectedCategories.includes(item)}
+                                                onTap={(s) => toggleCategory(s)}/>
+                                        );
+                                    }}
+                                />
+                                <PantrySpacer horizontal={false} space={20}/>
+                                <Text style={styles.selectionText}>{filteredProducts.length} Based on your
+                                    selection</Text>
+                                <Text style={styles.productsTitle}>Our products</Text>
+                                <PantrySpacer horizontal={false} space={20}/>
+                                <FlatList
+                                    data={filteredProducts}
+                                    numColumns={2}
+                                    columnWrapperStyle={styles.row}
+                                    renderItem={({item}) => {
+                                        return (
+                                            <PantryProductListItem
+                                                product={item}
+                                                onCartPress={() => dispatchAddToCart(item)}
+                                            />
+                                        );
+                                    }}
+                                    contentContainerStyle={styles.flatlistBottom}/>
+                            </View>
+                        )
+                }
             </SafeAreaView>
         </View>
     );
@@ -242,20 +266,31 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: sansRegular,
         color: primaryColor,
+        marginStart: 16,
+        marginEnd: 16,
     },
     productsTitle: {
         fontSize: 30,
         color: primaryColor,
         fontFamily: serifBold,
         lineHeight: 40,
+        marginStart: 16,
+        marginEnd: 16,
     },
     row: {
         flex: 1,
         justifyContent: 'space-around',
     },
     flatlistBottom: {
-        paddingBottom: 220,
+        marginStart: 8,
+        marginEnd: 8,
+        paddingBottom: Platform.OS === 'ios' ? 260 : 300,
+    },
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 
-export default ProductsListing;
+export default Products;

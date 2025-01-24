@@ -4,9 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from '../screens/splash/Splash.tsx';
 import RegisterScreen from '../screens/register/Register.tsx';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ProductsListing from '../screens/home/products/ProductsListing.tsx';
+import Products from '../screens/home/products/Products.tsx';
 import Cart from '../screens/home/cart/Cart.tsx';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {
     bgColor,
     primaryColor, sansRegular,
@@ -55,7 +55,7 @@ function Home(): React.JSX.Element {
             }}>
             <Tab.Screen
                 name={routeProducts}
-                component={ProductsListing}
+                component={Products}
                 options={{
                     tabBarIcon: ({focused, size}) => (
                         <Icon
@@ -144,12 +144,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     tabBar: {
-        height: 80,
-        paddingHorizontal: 5,
-        paddingTop: 15,
         backgroundColor: primaryColor,
         position: 'static',
-        borderTopWidth: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 80,
+        paddingTop: Platform.OS === 'ios' ? 15 : 20,
     },
     tabBarBadgeStyle: {
         color: primaryColor,

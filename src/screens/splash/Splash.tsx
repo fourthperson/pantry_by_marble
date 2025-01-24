@@ -1,11 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import {
-    Animated,
+    Animated, StatusBar,
     StyleSheet,
     View,
 } from 'react-native';
 import {
-    baseStyle,
+    baseStyle, bgColor,
     primaryColor,
     serifBold,
 } from '../../config/theme.ts';
@@ -20,10 +20,10 @@ import {
 function SplashScreen(): React.JSX.Element {
     const navigation = useNavigation();
 
-    const fade: Animated.Value = useRef(new Animated.Value(0)).current;
+    const textOpacity: Animated.Value = useRef(new Animated.Value(0)).current;
 
     function animateText() {
-        Animated.timing(fade, {
+        Animated.timing(textOpacity, {
             toValue: 1,
             duration: textAnomationDurationMillis,
             useNativeDriver: true,
@@ -40,10 +40,10 @@ function SplashScreen(): React.JSX.Element {
     return (
         <View style={baseStyle.bgContainer}>
             <SafeAreaView style={styles.centered}>
-                <Animated.Text style={[styles.brandText, {opacity: fade}]}>
+                <Animated.Text style={[styles.brandText, {opacity: textOpacity}]}>
                     Pantry
                 </Animated.Text>
-                <Animated.Text style={[styles.brandSubText, {opacity: fade}]}>
+                <Animated.Text style={[styles.brandSubText, {opacity: textOpacity}]}>
                     by Marble
                 </Animated.Text>
             </SafeAreaView>
