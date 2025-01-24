@@ -15,7 +15,6 @@ export const serifItalic = 'Adobe Garamond Pro Italic';
 export const serifBoldItalic = 'Adobe Garamond Pro Bold Italic';
 // sans
 export const sansRegular = 'Avenir Roman';
-// todo check bold font not working
 export const sansBold = Platform.OS === 'ios' ? 'Avenir LT Std 95 Black' : 'Avenir Heavy';
 export const sansBoldAlt = 'Geomanist Medium';
 
