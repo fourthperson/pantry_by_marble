@@ -1,6 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {baseStyle, primaryColor, sansBold, sansRegular, tabInactiveColor} from '../config/theme.ts';
+import {
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native';
+import {
+    baseStyle,
+    primaryColor,
+    sansBold,
+    sansRegular,
+    tabInactiveColor,
+} from '../config/theme.ts';
 import {useTranslation} from 'react-i18next';
 
 function PromoCodeComponent(): React.JSX.Element {
@@ -10,7 +23,11 @@ function PromoCodeComponent(): React.JSX.Element {
         <View style={styles.container}>
             <View style={styles.innerRow}>
                 <View style={baseStyle.fillSpace}>
-                    <Text style={styles.addStyle}>{t('add_promo_code')}</Text>
+                    <TextInput
+                        placeholder={t('add_promo_code')}
+                        placeholderTextColor={primaryColor}
+                        selectionColor={primaryColor}
+                        style={styles.addStyle}/>
                 </View>
                 <View style={styles.divider}/>
                 <TouchableOpacity>
@@ -26,8 +43,8 @@ const styles = StyleSheet.create({
         borderRadius: 80,
         borderColor: primaryColor,
         borderWidth: 1,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: Platform.OS === 'ios' ? 10 : 2,
+        paddingBottom: Platform.OS === 'ios' ? 10 : 2,
         paddingStart: 0,
         paddingEnd: 20,
     },

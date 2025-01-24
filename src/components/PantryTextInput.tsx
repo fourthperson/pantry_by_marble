@@ -43,7 +43,6 @@ function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {
                     <TextInput
                         style={styles.inputStyle}
                         value={value}
-                        onEndEditing={props.onDone}
                         selectionColor={primaryColor}
                         autoCapitalize="none"
                         onChangeText={setValue}

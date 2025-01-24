@@ -69,7 +69,6 @@
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
 		<string>Avenir Black.ttf</string>
-		<string>Adobe Garamond Pro Bold Italic.otf</string>
 		<string>Adobe Garamond Pro Bold.otf</string>
 		<string>Adobe Garamond Pro Italic.otf</string>
 		<string>Adobe Garamond Pro.otf</string>
@@ -77,6 +76,7 @@
 		<string>Avenir Roman.ttf</string>
 		<string>Avenir Heavy.ttf</string>
 		<string>Avenir LT Std 95 Black.otf</string>
+		<string>Adobe Garamond Pro Bold Italic.otf</string>
 	</array>
 </dict>
 </plist>

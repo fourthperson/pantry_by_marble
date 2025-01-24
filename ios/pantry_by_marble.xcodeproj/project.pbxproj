@@ -20,7 +20,7 @@
 		A83A29782637412CB12BBE3C /* Adobe Garamond Pro Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF838A8C154F5CB0CB3CA9 /* Adobe Garamond Pro Bold.otf */; };
 		BC672DC185244EBABFD00A82 /* Avenir Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D50CE2F01D140A6BAD7D06D /* Avenir Roman.ttf */; };
 		E0BF342F206E48979BA1141D /* Geomanist Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5676A9CB9E384170BD25F679 /* Geomanist Medium.otf */; };
-		E1192AEC2A4442E8ADA62119 /* Adobe Garamond Pro Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8BBDB3C313044680B8855F6A /* Adobe Garamond Pro Bold Italic.otf */; };
+		10383F78327E4C0B849A2703 /* Adobe Garamond Pro Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +37,12 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-pantry_by_marble.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pantry_by_marble.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = pantry_by_marble/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = pantry_by_marble/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8BBDB3C313044680B8855F6A /* Adobe Garamond Pro Bold Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Adobe Garamond Pro Bold Italic.otf"; path = "../assets/fonts/Adobe Garamond Pro Bold Italic.otf"; sourceTree = "<group>"; };
 		8D41262479FB43D6BD7F2110 /* Avenir LT Std 95 Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir LT Std 95 Black.otf"; path = "../assets/fonts/Avenir LT Std 95 Black.otf"; sourceTree = "<group>"; };
 		BFACA685094E4987AE36EA69 /* Avenir Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir Black.ttf"; path = "../assets/fonts/Avenir Black.ttf"; sourceTree = "<group>"; };
 		C4326E76FC90454081F187F8 /* Avenir Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir Heavy.ttf"; path = "../assets/fonts/Avenir Heavy.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FDA960D3E77A4AAD86CC39E7 /* Adobe Garamond Pro.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Adobe Garamond Pro.otf"; path = "../assets/fonts/Adobe Garamond Pro.otf"; sourceTree = "<group>"; };
+		31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */ = {isa = PBXFileReference; name = "Adobe Garamond Pro Bold Italic.otf"; path = "../assets/fonts/Adobe Garamond Pro Bold Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				BFACA685094E4987AE36EA69 /* Avenir Black.ttf */,
-				8BBDB3C313044680B8855F6A /* Adobe Garamond Pro Bold Italic.otf */,
 				0EDF838A8C154F5CB0CB3CA9 /* Adobe Garamond Pro Bold.otf */,
 				00F658B2F94A40F4B9B1C350 /* Adobe Garamond Pro Italic.otf */,
 				FDA960D3E77A4AAD86CC39E7 /* Adobe Garamond Pro.otf */,
@@ -129,6 +128,7 @@
 				4D50CE2F01D140A6BAD7D06D /* Avenir Roman.ttf */,
 				C4326E76FC90454081F187F8 /* Avenir Heavy.ttf */,
 				8D41262479FB43D6BD7F2110 /* Avenir LT Std 95 Black.otf */,
+				31BB0E39B274427E842D397C /* Adobe Garamond Pro Bold Italic.otf */,
 			);
 			name = Resources;
 			path = "";
@@ -198,7 +198,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6F8D1A376158CE14AADAD80C /* PrivacyInfo.xcprivacy in Resources */,
 				11B923AD51E942EE91DB07D6 /* Avenir Black.ttf in Resources */,
-				E1192AEC2A4442E8ADA62119 /* Adobe Garamond Pro Bold Italic.otf in Resources */,
 				A83A29782637412CB12BBE3C /* Adobe Garamond Pro Bold.otf in Resources */,
 				9440105D888B4A7B8BDA9966 /* Adobe Garamond Pro Italic.otf in Resources */,
 				3471158DECC44A6EA7B64B2E /* Adobe Garamond Pro.otf in Resources */,
@@ -206,6 +205,7 @@
 				BC672DC185244EBABFD00A82 /* Avenir Roman.ttf in Resources */,
 				2D4CEA793BE14BD88A228E5E /* Avenir Heavy.ttf in Resources */,
 				48B31D068F484025AE8FF608 /* Avenir LT Std 95 Black.otf in Resources */,
+				10383F78327E4C0B849A2703 /* Adobe Garamond Pro Bold Italic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -84,7 +84,7 @@ function Cart(): React.JSX.Element {
                     {
                         cartList.length === 0 &&
                         <View style={styles.emptyGroup}>
-                            <Icon name={'shopping-cart'} color={'black'} size={30}/>
+                            <Icon name={'shopping-cart'} color={primaryColor} size={30}/>
                             <Text style={styles.emptyText}>
                                 {t('cart_empty')}
                             </Text>
@@ -95,9 +95,11 @@ function Cart(): React.JSX.Element {
                     }
                 </View>
                 <View style={styles.bottomGroup}>
-                    <View style={styles.promoGroup}>
-                        <PromoCodeComponent/>
-                    </View>
+                    {cartList.length > 0 &&
+                        <View style={styles.promoGroup}>
+                            <PromoCodeComponent/>
+                        </View>
+                    }
                     <View style={styles.checkoutGroup}>
                         <CheckoutTally label={t('sub_total')} value={formatPrice(cart.total)}/>
                         <CheckoutTally label={t('delivery')} value={formatPrice(deliveryFee)}/>
@@ -208,8 +210,8 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     emptyText: {
-        fontSize: 14,
         fontFamily: sansRegular,
+        fontSize: 14,
         margin: 20,
     },
     backLinkText: {

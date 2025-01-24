@@ -10,7 +10,7 @@ export const checkOutBackground = '#ebeae5';
 // serif
 export const serifRegular = 'Adobe Garamond Pro';
 export const serifBold = 'Adobe Garamond Pro Bold';
-// todo check italic font
+// todo check italic font on ios
 export const serifItalic = 'Adobe Garamond Pro Italic';
 export const serifBoldItalic = 'Adobe Garamond Pro Bold Italic';
 // sans
