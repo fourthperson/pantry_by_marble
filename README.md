@@ -4,6 +4,35 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
+> **Note**: Normal readme will resume after this Pantry Setup section
+
+## Pantry Setup
+### 1.  Clone the repository from GitHub
+In a terminal, run `git clone https://github.com/fourthperson/pantry_by_marble`
+<br/>
+This will create a new directory `pantry_by_marble`
+
+### 2. Install dependencies
+- In the same terminal window, run `cd pantry_by_marble` to get into the cloned directory from Step 1 above.
+<br/>
+- Run `yarn` to install dependencies specified in `package.json`. Wait for the command to complete.
+
+##### iOS Setup
+- Run `cd ios` to get into the iOS project.
+- Run `pod install` to install iOS specific dependencies.
+#### Assets Linkinkg
+- Run `npx react-native-asset` to bundle assets. Wait for the command to complete.
+
+### 3. Running the app
+- Ensure you have either an android/ios emulator or physical device set up and running
+- Run `yarn start` to start the Metro Server.
+- Open another terminal window or tab.
+- In the new terminal window run `yarn android` to run on Android or `yarn ios` to run on iOS
+- Wait for the app to build and bundle the app. It will deploy on the device of the platform that you selected (android/ios)
+
+> **Note**: End of Pantry Setup Section.
+Normal readme resumes here
+
 ## Step 1: Start Metro
 
 First, you will need to run **Metro**, the JavaScript build tool for React Native.

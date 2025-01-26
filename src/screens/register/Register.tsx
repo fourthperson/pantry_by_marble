@@ -99,14 +99,12 @@ function RegisterScreen(): React.JSX.Element {
                             label={t('label_full_name')}
                             value={fullName}
                             onTextChanged={setFullname}
-                            keyboardType={'default'}
-                            isPasswordField={false}/>
+                            keyboardType={'default'}/>
                         <PantryTextInput
                             label={t('label_email')}
                             value={emailAddress}
                             onTextChanged={setEmailAddress}
-                            keyboardType={'email-address'}
-                            isPasswordField={false}/>
+                            keyboardType={'email-address'}/>
                         <PantryPhoneInput
                             label={t('label_mobile_number')}
                             prefix={defaultCountryCallingCode}

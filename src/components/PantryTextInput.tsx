@@ -20,7 +20,7 @@ export interface PantryTextInputprops {
     value: string;
     onTextChanged: (s: string) => void;
     keyboardType: KeyboardTypeOptions;
-    isPasswordField: boolean;
+    isPasswordField?: boolean;
 }
 
 function PantryTextInput(props: PantryTextInputprops): React.JSX.Element {
