@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {
     ScrollView,
     StyleSheet,
@@ -36,10 +36,6 @@ function RegisterScreen(): React.JSX.Element {
     const [emailAddress, setEmailAddress] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
-
-    function home() {
-        navigation.push(routeHome);
-    }
 
     function validateInput() {
         if (fullName === '') {
@@ -139,9 +135,7 @@ function RegisterScreen(): React.JSX.Element {
                             <View style={styles.divider}/>
                         </View>
                         <PantrySpacer horizontal={false} space={20}/>
-                        <PantryButton
-                            label={t('explore_our_app')}
-                            onPress={home}/>
+                        <PantryButton label={t('explore_our_app')}/>
                         <PantrySpacer horizontal={false} space={20}/>
                         <Text style={styles.terms}>
                             <Text style={styles.termsText}>{t('label_terms_1')}</Text>

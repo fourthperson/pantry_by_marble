@@ -12,7 +12,7 @@ import {
 
 export interface PantryButtonProps {
     label: string;
-    onPress: () => void;
+    onPress?: () => void;
 }
 
 function PantryButton(props: PantryButtonProps): React.JSX.Element {
