@@ -96,21 +96,22 @@ function Cart(): React.JSX.Element {
                         </View>
                     }
                 </View>
-                <View style={styles.bottomGroup}>
-                    {cartList.length > 0 &&
+                {
+                    cartList.length > 0 &&
+                    <View style={styles.bottomGroup}>
                         <View style={styles.promoGroup}>
                             <PromoCodeComponent/>
                         </View>
-                    }
-                    <View style={styles.checkoutGroup}>
-                        <CheckoutTally label={t('sub_total')} value={formatPrice(cart.total)}/>
-                        <CheckoutTally label={t('delivery')} value={formatPrice(deliveryFee)}/>
-                        <View style={styles.checkoutDivider}/>
-                        <CheckoutTotal label={t('total')} value={formatPrice(cart.total + deliveryFee)}/>
-                        <PantrySpacer horizontal={false} space={10}/>
-                        <PantryButton label={t('checkout')} onPress={checkout}/>
+                        <View style={styles.checkoutGroup}>
+                            <CheckoutTally label={t('sub_total')} value={formatPrice(cart.total)}/>
+                            <CheckoutTally label={t('delivery')} value={formatPrice(deliveryFee)}/>
+                            <View style={styles.checkoutDivider}/>
+                            <CheckoutTotal label={t('total')} value={formatPrice(cart.total + deliveryFee)}/>
+                            <PantrySpacer horizontal={false} space={10}/>
+                            <PantryButton label={t('checkout')} onPress={checkout}/>
+                        </View>
                     </View>
-                </View>
+                }
             </SafeAreaView>
         </View>
     )
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
     },
     emptyGroup: {
         flex: 1,
-        marginTop: 100,
+        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         width: '100%',

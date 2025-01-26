@@ -6,15 +6,18 @@ import RegisterScreen from '../screens/register/Register.tsx';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Products from '../screens/home/products/Products.tsx';
 import Cart from '../screens/home/cart/Cart.tsx';
+import EmptyScreen from '../screens/home/empty/Empty.tsx';
 import {Platform, StyleSheet} from 'react-native';
 import {
     bgColor,
     primaryColor, sansRegular,
     tabInactiveColor,
 } from '../config/theme.ts';
-import Icon from 'react-native-vector-icons/Ionicons';
-
-import EmptyScreen from '../screens/home/empty/Empty.tsx';
+import HomeSvg from '../../assets/images/home.svg';
+import FavouriteSvg from '../../assets/images/favourite.svg';
+import SearchSvg from '../../assets/images/search.svg';
+import CartSvg from '../../assets/images/cart.svg';
+import ProfileSvg from '../../assets/images/profile.svg';
 import {useSelector} from 'react-redux';
 
 export const routeSplash = 'splash';
@@ -58,11 +61,10 @@ function Home(): React.JSX.Element {
                 component={Products}
                 options={{
                     tabBarIcon: ({focused, size}) => (
-                        <Icon
-                            name={'home-outline'}
-                            size={size}
-                            color={tabTint(focused)}
-                        />
+                        <HomeSvg
+                            height={size}
+                            width={size}
+                            color={tabTint(focused)}/>
                     ),
                 }}/>
             <Tab.Screen
@@ -70,11 +72,10 @@ function Home(): React.JSX.Element {
                 component={EmptyScreen}
                 options={{
                     tabBarIcon: ({focused, size}) => (
-                        <Icon
-                            name={'heart-outline'}
-                            size={size}
-                            color={tabTint(focused)}
-                        />
+                        <FavouriteSvg
+                            height={size}
+                            width={size}
+                            color={tabTint(focused)}/>
                     ),
                 }}/>
             <Tab.Screen
@@ -82,11 +83,10 @@ function Home(): React.JSX.Element {
                 component={EmptyScreen}
                 options={{
                     tabBarIcon: ({focused, size}) => (
-                        <Icon
-                            name={'search-outline'}
-                            size={size}
-                            color={tabTint(focused)}
-                        />
+                        <SearchSvg
+                            height={size}
+                            width={size}
+                            color={tabTint(focused)}/>
                     ),
                 }}/>
             <Tab.Screen
@@ -96,11 +96,10 @@ function Home(): React.JSX.Element {
                     tabBarBadge: cartCount === 0 ? undefined : cartCount,
                     tabBarBadgeStyle: styles.tabBarBadgeStyle,
                     tabBarIcon: ({focused, size}) => (
-                        <Icon
-                            name={'cart-outline'}
-                            size={size}
-                            color={tabTint(focused)}
-                        />
+                        <CartSvg
+                            height={size}
+                            width={size}
+                            color={tabTint(focused)}/>
                     ),
                 }}/>
             <Tab.Screen
@@ -108,11 +107,10 @@ function Home(): React.JSX.Element {
                 component={EmptyScreen}
                 options={{
                     tabBarIcon: ({focused, size}) => (
-                        <Icon
-                            name={'person-outline'}
-                            size={size}
-                            color={tabTint(focused)}
-                        />
+                        <ProfileSvg
+                            height={size}
+                            width={size}
+                            color={tabTint(focused)}/>
                     ),
                 }}/>
         </Tab.Navigator>
