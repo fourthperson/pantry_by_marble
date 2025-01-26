@@ -20,8 +20,8 @@ This will create a new directory `pantry_by_marble`
 ##### iOS Setup
 - Run `cd ios` to get into the iOS project.
 - Run `pod install` to install iOS specific dependencies.
-#### Assets Linkinkg
-- Run `npx react-native-asset` to bundle assets. Wait for the command to complete.
+##### Assets Linkinkg
+- Run `npx react-native-asset` to bundle assets like fonts and images. Wait for the command to complete.
 
 ### 3. Running the app
 - Ensure you have either an android/ios emulator or physical device set up and running
