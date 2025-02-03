@@ -98,7 +98,7 @@ const SearchIcon = (props: {
   );
 };
 
-function Home(): React.JSX.Element {
+const Home = (): React.JSX.Element => {
   const cart = useSelector(state => state.cart);
   const [cartCount, setCartCount] = useState<number>(0);
 
@@ -121,23 +121,17 @@ function Home(): React.JSX.Element {
       <Tab.Screen
         name={routeProducts}
         component={Products}
-        options={{
-          tabBarIcon: HomeIcon,
-        }}
+        options={{tabBarIcon: HomeIcon}}
       />
       <Tab.Screen
         name={routeFavourites}
         component={EmptyScreen}
-        options={{
-          tabBarIcon: FavouriteIcon,
-        }}
+        options={{tabBarIcon: FavouriteIcon}}
       />
       <Tab.Screen
         name={routeSearch}
         component={EmptyScreen}
-        options={{
-          tabBarIcon: SearchIcon,
-        }}
+        options={{tabBarIcon: SearchIcon}}
       />
       <Tab.Screen
         name={routeCart}
@@ -151,15 +145,13 @@ function Home(): React.JSX.Element {
       <Tab.Screen
         name={routeProfile}
         component={EmptyScreen}
-        options={{
-          tabBarIcon: ProfileIcon,
-        }}
+        options={{tabBarIcon: ProfileIcon}}
       />
     </Tab.Navigator>
   );
-}
+};
 
-function PantryAppNavigator(): React.JSX.Element {
+const PantryAppNavigator = (): React.JSX.Element => {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -175,7 +167,7 @@ function PantryAppNavigator(): React.JSX.Element {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   row: {

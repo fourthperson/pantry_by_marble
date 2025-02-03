@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {baseStyle, primaryColor, serifBold} from '../../config/theme.ts';
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import {routeRegister} from '../../navigation/navigator.tsx';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {
@@ -9,8 +9,9 @@ import {
   textAnomationDurationMillis,
 } from '../../config/constants.ts';
 
-function SplashScreen(): React.JSX.Element {
+const SplashScreen = (): React.JSX.Element => {
   const navigation = useNavigation();
+  const registrationAction = StackActions.replace(routeRegister);
 
   const textOpacity: Animated.Value = useRef(new Animated.Value(0)).current;
 
@@ -25,7 +26,7 @@ function SplashScreen(): React.JSX.Element {
   useEffect(() => {
     animateText();
     setTimeout(() => {
-      navigation.replace(routeRegister);
+      navigation.dispatch(registrationAction);
     }, splashDurationMillis);
   });
 
@@ -41,7 +42,7 @@ function SplashScreen(): React.JSX.Element {
       </SafeAreaView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   centered: {
