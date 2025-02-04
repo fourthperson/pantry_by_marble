@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   baseStyle,
   bgColor,
@@ -30,6 +23,7 @@ import {useSelector} from 'react-redux';
 import {formatPrice} from '../../../util/util.ts';
 import CartSvg from '../../../../assets/images/cart.svg';
 import {useTranslation} from 'react-i18next';
+import {FlashList} from '@shopify/flash-list';
 
 const Cart = (): React.JSX.Element => {
   const navigation = useNavigation();
@@ -72,8 +66,9 @@ const Cart = (): React.JSX.Element => {
         </View>
         <View style={[baseStyle.fillSpace]}>
           {cartList.length > 0 && (
-            <FlatList
+            <FlashList
               data={cartList}
+              estimatedItemSize={118}
               renderItem={({item}) => (
                 <CartListItem product={item.product} quantity={item.quantity} />
               )}

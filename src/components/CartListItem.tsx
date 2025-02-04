@@ -10,7 +10,6 @@ import {
 import PantrySpacer from './PantrySpacer.tsx';
 import {formatPrice, imageMapper} from '../util/util.ts';
 import {CartItem} from '../types/types.ts';
-import {useDispatch} from 'react-redux';
 import {
   increaseQuantity,
   removeFromCart,
@@ -18,9 +17,10 @@ import {
 } from '../store/cart_slice';
 import {useTranslation} from 'react-i18next';
 import CartQuantityButton from './CartQuantityButton.tsx';
+import {useAppDispatch} from '../store/store.ts';
 
 const CartListItem = (item: CartItem): React.JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [count, setCount] = useState<number>(item.quantity);
 
