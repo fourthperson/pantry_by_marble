@@ -20,6 +20,7 @@ import SearchSvg from '../../assets/images/search.svg';
 import CartSvg from '../../assets/images/cart.svg';
 import ProfileSvg from '../../assets/images/profile.svg';
 import {useSelector} from 'react-redux';
+import {numberOfProducts} from '../config/constants.ts';
 
 export const routeSplash = 'splash';
 export const routeRegister = 'register';
@@ -98,6 +99,10 @@ const SearchIcon = (props: {
   );
 };
 
+const ProductsScreen = () => {
+  return <Products productCount={numberOfProducts} />;
+};
+
 const Home = (): React.JSX.Element => {
   const cart = useSelector(state => state.cart);
   const [cartCount, setCartCount] = useState<number>(0);
@@ -120,7 +125,7 @@ const Home = (): React.JSX.Element => {
       }}>
       <Tab.Screen
         name={routeProducts}
-        component={Products}
+        component={ProductsScreen}
         options={{tabBarIcon: HomeIcon}}
       />
       <Tab.Screen

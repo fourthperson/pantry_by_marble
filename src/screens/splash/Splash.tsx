@@ -6,7 +6,7 @@ import {routeRegister} from '../../navigation/navigator.tsx';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   splashDurationMillis,
-  textAnomationDurationMillis,
+  textAnimationDurationMillis,
 } from '../../config/constants.ts';
 
 const SplashScreen = (): React.JSX.Element => {
@@ -18,7 +18,7 @@ const SplashScreen = (): React.JSX.Element => {
   function animateText() {
     Animated.timing(textOpacity, {
       toValue: 1,
-      duration: textAnomationDurationMillis,
+      duration: textAnimationDurationMillis,
       useNativeDriver: true,
     }).start();
   }
