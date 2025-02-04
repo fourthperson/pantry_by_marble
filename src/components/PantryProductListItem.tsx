@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import PantrySpacer from './PantrySpacer.tsx';
 import {
@@ -8,17 +8,26 @@ import {
   sansRegular,
 } from '../config/theme.ts';
 import CartSvg from '../../assets/images/cart.svg';
-import {formatPrice, imageMapper} from '../util/util.ts';
-import {PantryProduct} from '../types/types.ts';
+import {alertMsg, formatPrice, imageMapper} from '../util/util.ts';
+import {CartItem, PantryProduct} from '../types/types.ts';
+import {useAppDispatch} from '../store/store.ts';
+import {addToCart} from '../store/cart_slice.ts';
 
-interface PantryProductProps {
+const PantryProductListItem = (props: {
   product: PantryProduct;
-  onCartPress: () => void;
-}
+}): React.JSX.Element => {
+  const dispatch = useAppDispatch();
 
-const PantryProductListItem = (
-  props: PantryProductProps,
-): React.JSX.Element => {
+  const add = useCallback(() => {
+    dispatch(
+      addToCart({
+        quantity: 1,
+        product: props.product,
+      } as CartItem),
+    );
+    alertMsg(`${props.product.name} Added to cart!`, 'success');
+  }, [dispatch, props.product]);
+
   return (
     <View>
       <Image style={styles.image} source={imageMapper(props.product.image)} />
@@ -31,7 +40,7 @@ const PantryProductListItem = (
             {formatPrice(props.product.price)}
           </Text>
         </View>
-        <TouchableOpacity onPress={_ => props.onCartPress()}>
+        <TouchableOpacity onPress={add}>
           <View style={styles.circularBorder}>
             <CartSvg height={20} width={20} color={primaryColor} />
           </View>

@@ -1,7 +1,7 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import cartReducer from './cart_slice';
-import productReducer from './product_slice';
-import {useDispatch} from 'react-redux';
+import cartReducer from './cart_slice.ts';
+import productReducer from './product_slice.ts';
+import {useDispatch, useSelector} from 'react-redux';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
@@ -16,9 +16,9 @@ const store = configureStore({
     }),
 });
 
-export type AppStore = typeof store;
-export type RootState = typeof rootReducer;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
 
 export default store;

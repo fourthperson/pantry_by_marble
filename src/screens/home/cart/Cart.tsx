@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo} from 'react';
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   baseStyle,
@@ -19,37 +19,46 @@ import PantryButton from '../../../components/PantryButton.tsx';
 import PromoCodeComponent from '../../../components/PromoCodeComponent.tsx';
 import {CartItem} from '../../../types/types.ts';
 import CartListItem from '../../../components/CartListItem.tsx';
-import {useSelector} from 'react-redux';
 import {formatPrice} from '../../../util/util.ts';
 import CartSvg from '../../../../assets/images/cart.svg';
 import {useTranslation} from 'react-i18next';
 import {FlashList} from '@shopify/flash-list';
+import {useAppSelector} from '../../../store/store.ts';
 
 const Cart = (): React.JSX.Element => {
   const navigation = useNavigation();
 
   const {t} = useTranslation();
 
-  const cart = useSelector(state => state.cart);
+  const cart = useAppSelector(state => state.cart);
 
-  const [cartList, setCartList] = useState<Array<CartItem>>([]);
+  const cartList = useMemo(() => {
+    if (!Array.isArray(cart.items)) {
+      return [];
+    }
+    const items: Array<CartItem> = [];
+    for (let i = 0; i < cart.items.length; i++) {
+      items.push(cart.items[i] as CartItem);
+    }
+    return items;
+  }, [cart]);
 
   const deliveryFee = cartList.length === 0 ? 0 : 28;
 
-  useEffect(() => {
-    fillList();
-  }, [cart]);
-
-  function fillList() {
-    if (!Array.isArray(cart.cart)) {
-      return;
-    }
-    const items: Array<CartItem> = [];
-    for (let i = 0; i < cart.cart.length; i++) {
-      items.push(cart.cart[i] as CartItem);
-    }
-    setCartList(items);
-  }
+  // const filListCallback = useCallback(() => {
+  //   if (!Array.isArray(cart.items)) {
+  //     return;
+  //   }
+  //   const items: Array<CartItem> = [];
+  //   for (let i = 0; i < cart.items.length; i++) {
+  //     items.push(cart.items[i] as CartItem);
+  //   }
+  //   setCartList(items);
+  // }, [cart]);
+  //
+  // useEffect(() => {
+  //   filListCallback();
+  // }, [filListCallback]);
 
   return (
     <View style={baseStyle.bgContainer}>
@@ -69,9 +78,7 @@ const Cart = (): React.JSX.Element => {
             <FlashList
               data={cartList}
               estimatedItemSize={118}
-              renderItem={({item}) => (
-                <CartListItem product={item.product} quantity={item.quantity} />
-              )}
+              renderItem={({item}) => <CartListItem item={item} />}
               contentContainerStyle={styles.flatlistBottom}
             />
           )}

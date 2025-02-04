@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from '../screens/splash/Splash.tsx';
@@ -19,8 +19,8 @@ import FavouriteSvg from '../../assets/images/favourite.svg';
 import SearchSvg from '../../assets/images/search.svg';
 import CartSvg from '../../assets/images/cart.svg';
 import ProfileSvg from '../../assets/images/profile.svg';
-import {useSelector} from 'react-redux';
 import {numberOfProducts} from '../config/constants.ts';
+import {useAppSelector} from '../store/store.ts';
 
 export const routeSplash = 'splash';
 export const routeRegister = 'register';
@@ -104,15 +104,7 @@ const ProductsScreen = () => {
 };
 
 const Home = (): React.JSX.Element => {
-  const cart = useSelector(state => state.cart);
-  const [cartCount, setCartCount] = useState<number>(0);
-
-  useEffect(() => {
-    if (!Array.isArray(cart.cart)) {
-      return;
-    }
-    setCartCount(cart.cart.length);
-  }, [cart]);
+  const cart = useAppSelector(state => state.cart.items);
 
   return (
     <Tab.Navigator
@@ -142,7 +134,7 @@ const Home = (): React.JSX.Element => {
         name={routeCart}
         component={Cart}
         options={{
-          tabBarBadge: cartCount === 0 ? undefined : cartCount,
+          tabBarBadge: cart.length === 0 ? undefined : cart.length,
           tabBarBadgeStyle: styles.tabBarBadgeStyle,
           tabBarIcon: CartIcon,
         }}

@@ -19,14 +19,12 @@ import PantrySpacer from '../../../components/PantrySpacer.tsx';
 import PantryBar from '../../../components/PantryBar.tsx';
 import PantryProductListItem from '../../../components/PantryProductListItem.tsx';
 import FilterSvg from '../../../../assets/images/filter.svg';
-import {CartItem, PantryProduct} from '../../../types/types.ts';
-import {useSelector} from 'react-redux';
+import {PantryProduct} from '../../../types/types.ts';
+import {useAppSelector} from '../../../store/store.ts';
 import {useAppDispatch} from '../../../store/store.ts';
-import {addToCart} from '../../../store/cart_slice';
-import {alertMsg} from '../../../util/util.ts';
 import {productCategories} from '../../../config/constants.ts';
 import {useTranslation} from 'react-i18next';
-import {filterProducts, loadProducts} from '../../../store/product_slice';
+import {filterProducts, loadProducts} from '../../../store/product_slice.ts';
 import {ColumnItem} from '../../../components/ColumnItem.tsx';
 import {FlashList} from '@shopify/flash-list';
 import CategoryFilter from '../../../components/CategoryFilter.tsx';
@@ -40,12 +38,11 @@ const Products = (props: {productCount: number}): React.JSX.Element => {
 
   const categoryAll = productCategories[0];
 
-  const products: Array<PantryProduct> = useSelector(
+  const products: Array<PantryProduct> = useAppSelector(
     state => state.products.filteredItems,
   );
-  const isLoading: boolean = useSelector(state => state.products.loading);
+  const isLoading: boolean = useAppSelector(state => state.products.loading);
 
-  const [productList, setProductList] = useState<Array<PantryProduct>>([]);
   const [selectedCategories, setSelectedCategories] = useState<Array<string>>([
     categoryAll,
   ]);
@@ -55,24 +52,8 @@ const Products = (props: {productCount: number}): React.JSX.Element => {
   }, [dispatch, props.productCount]);
 
   useEffect(() => {
-    if (!Array.isArray(products)) {
-      return;
-    }
-    setProductList(products);
-  }, [products]);
-
-  useEffect(() => {
     dispatch(filterProducts(selectedCategories));
   }, [dispatch, selectedCategories]);
-
-  function dispatchAddToCart(product: PantryProduct) {
-    const cartItem: CartItem = {
-      quantity: 1,
-      product: product,
-    };
-    dispatch(addToCart(cartItem));
-    alertMsg(`${product.name} Added to cart!`, 'success');
-  }
 
   return (
     <View style={baseStyle.bgContainer}>
@@ -105,23 +86,20 @@ const Products = (props: {productCount: number}): React.JSX.Element => {
             />
             <PantrySpacer horizontal={false} space={20} />
             <Text style={styles.selectionText}>
-              {productList.length}
+              {products.length}
               {t('based_on_your_selection')}
             </Text>
             <Text style={styles.productsTitle}>{t('title_our_products')}</Text>
             <PantrySpacer horizontal={false} space={20} />
             <View style={styles.gridContainer}>
               <FlashList
-                data={productList}
+                data={products}
                 estimatedItemSize={245}
                 numColumns={2}
                 renderItem={({index, item}) => {
                   return (
                     <ColumnItem index={index} numColumns={2}>
-                      <PantryProductListItem
-                        product={item}
-                        onCartPress={() => dispatchAddToCart(item)}
-                      />
+                      <PantryProductListItem product={item} />
                     </ColumnItem>
                   );
                 }}
