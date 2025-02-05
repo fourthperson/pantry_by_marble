@@ -15,6 +15,8 @@ import EyeSvg from '../../assets/images/eye.svg';
 const PantryTextInput = (props: {
   label: string;
   value: string;
+  validation: string;
+  isValid: boolean;
   onTextChanged: (s: string) => void;
   keyboardType: KeyboardTypeOptions;
   isPasswordField?: boolean;
@@ -22,13 +24,11 @@ const PantryTextInput = (props: {
   const [value, setValue] = useState(props.value);
   const [showValue, setShowValue] = useState(!props.isPasswordField);
 
+  const color = props.isValid ? primaryColor : 'red';
+
   useEffect(() => {
     props.onTextChanged(value);
   }, [props, value]);
-
-  function clear() {
-    setValue('');
-  }
 
   return (
     <View>
@@ -50,17 +50,20 @@ const PantryTextInput = (props: {
         <TouchableOpacity
           style={styles.closeButton}
           onPress={() => {
-            props.isPasswordField ? setShowValue(prev => !prev) : clear();
+            props.isPasswordField ? setShowValue(prev => !prev) : setValue('');
           }}>
           {props.isPasswordField ? (
             //  conditional icon here
-            <EyeSvg height={22} width={22} color={primaryColor} />
+            <EyeSvg height={22} width={22} color={color} />
           ) : (
-            <CloseSvg height={22} width={22} color={primaryColor} />
+            <CloseSvg height={22} width={22} color={color} />
           )}
         </TouchableOpacity>
       </View>
-      <View style={styles.divider} />
+      <View style={props.isValid ? styles.dividerValid : styles.dividerError} />
+      <Text style={styles.validationText}>
+        {value !== '' && !props.isValid ? props.validation : ''}
+      </Text>
       <View style={styles.spacer} />
     </View>
   );
@@ -70,18 +73,18 @@ export const PantryPhoneInput = (props: {
   label: string;
   prefix: string;
   value: string;
+  validation: string;
+  isValid: boolean;
   onTextChanged: (s: string) => void;
   keyboardType: KeyboardTypeOptions;
 }): React.JSX.Element => {
   const [value, setValue] = useState(props.value);
 
+  const color = props.isValid ? primaryColor : 'red';
+
   useEffect(() => {
     props.onTextChanged(value);
   }, [props, value]);
-
-  function clear() {
-    setValue('');
-  }
 
   return (
     <View>
@@ -100,11 +103,16 @@ export const PantryPhoneInput = (props: {
             underlineColorAndroid={'transparent'}
           />
         </View>
-        <TouchableOpacity style={styles.closeButton} onPress={clear}>
-          <CloseSvg height={22} width={22} color={primaryColor} />
+        <TouchableOpacity
+          style={styles.closeButton}
+          onPress={() => setValue('')}>
+          <CloseSvg height={22} width={22} color={color} />
         </TouchableOpacity>
       </View>
-      <View style={styles.divider} />
+      <View style={props.isValid ? styles.dividerValid : styles.dividerError} />
+      <Text style={styles.validationText}>
+        {value !== '' && !props.isValid ? props.validation : ''}
+      </Text>
       <View style={styles.spacer} />
     </View>
   );
@@ -113,6 +121,12 @@ export const PantryPhoneInput = (props: {
 const styles = StyleSheet.create({
   labelText: {
     color: primaryColor,
+    fontFamily: sansRegular,
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  validationText: {
+    color: 'red',
     fontFamily: sansRegular,
     fontSize: 12,
     lineHeight: 16,
@@ -136,13 +150,18 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
   },
-  divider: {
+  dividerValid: {
     backgroundColor: primaryColor,
     height: 1,
     marginTop: Platform.OS === 'ios' ? 7.5 : 2,
   },
+  dividerError: {
+    backgroundColor: 'red',
+    height: 1,
+    marginTop: Platform.OS === 'ios' ? 7.5 : 2,
+  },
   spacer: {
-    height: 30,
+    height: 20,
   },
 });
 

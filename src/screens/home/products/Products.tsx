@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
-  FlatList,
   Platform,
   StyleSheet,
   Text,
@@ -57,7 +56,7 @@ const Products = (props: {
 
   const [productList, setProductList] = useState<Array<PantryProduct>>([]);
 
-  const flatListRef = useRef<FlatList<PantryProduct>>();
+  const flatListRef = useRef<FlashList<PantryProduct> | null>(null);
 
   useEffect(() => {
     dispatch(loadProducts(props.productCount));

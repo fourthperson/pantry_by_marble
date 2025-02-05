@@ -112,7 +112,7 @@ const Cart = (): React.JSX.Element => {
                 value={formatPrice(cart.total + deliveryFee)}
               />
               <PantrySpacer horizontal={false} space={10} />
-              <PantryButton label={t('checkout')} />
+              <PantryButton label={t('checkout')} enabled={false} />
             </View>
           </View>
         )}

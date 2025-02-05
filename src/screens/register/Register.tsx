@@ -23,7 +23,7 @@ import PantryBackButton from '../../components/PantryBackButton.tsx';
 import PantryBar from '../../components/PantryBar.tsx';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import {routeHome} from '../../navigation/navigator.tsx';
-import {alertMsg, validPhone} from '../../util/util.ts';
+import {alertMsg, trim, validPhone} from '../../util/util.ts';
 import * as EmailValidator from 'email-validator';
 import {
   defaultCountryCallingCode,
@@ -37,45 +37,50 @@ const RegisterScreen = (): React.JSX.Element => {
 
   const homeAction = StackActions.push(routeHome);
 
-  const [fullName, setFullName] = useState('');
+  const [fullName, setfullName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+
+  const [nameValid, setNameValid] = useState<boolean>(true);
+  const [emailValid, setEmailValid] = useState<boolean>(true);
+  const [phoneValid, setPhoneValid] = useState<boolean>(true);
+  const [passwordValid, setPasswordValid] = useState<boolean>(true);
 
   function home() {
     navigation.dispatch(homeAction);
   }
 
   function validateInput() {
-    if (fullName === '') {
+    if (trim(fullName) === '') {
       alertMsg(t('validation_empty_name'), 'warning');
       return;
     }
-    if (fullName.length < 3) {
+    if (trim(fullName).length < 3) {
       alertMsg(t('validation_invalid_name'), 'warning');
       return;
     }
-    if (emailAddress === '') {
+    if (trim(emailAddress) === '') {
       alertMsg(t('validation_empty_email'), 'warning');
       return;
     }
-    if (!EmailValidator.validate(emailAddress)) {
+    if (!EmailValidator.validate(trim(emailAddress))) {
       alertMsg(t('validation_invalid_email'), 'warning');
       return;
     }
-    if (mobileNumber === '') {
+    if (trim(phoneNumber) === '') {
       alertMsg(t('validation_empty_phone'), 'warning');
       return;
     }
-    if (!validPhone(mobileNumber, defaultCountryCode)) {
+    if (!validPhone(trim(phoneNumber), defaultCountryCode)) {
       alertMsg(t('validation_invalid_phone'), 'warning');
       return;
     }
-    if (password === '') {
+    if (trim(password) === '') {
       alertMsg(t('validation_empty_password'), 'warning');
       return;
     }
-    if (password.length < 8) {
+    if (trim(password).length < 8) {
       alertMsg(t('validation_invalid_password'), 'warning');
       return;
     }
@@ -99,31 +104,66 @@ const RegisterScreen = (): React.JSX.Element => {
             <PantrySpacer space={75} horizontal={false} />
             <PantryTextInput
               label={t('label_full_name')}
+              validation={t('validation_invalid_name')}
               value={fullName}
-              onTextChanged={setFullName}
+              isValid={nameValid}
+              onTextChanged={s => {
+                setfullName(s);
+                setNameValid(s === '' || trim(s).length >= 3);
+              }}
               keyboardType={'default'}
             />
             <PantryTextInput
               label={t('label_email')}
+              validation={t('validation_invalid_email')}
               value={emailAddress}
-              onTextChanged={setEmailAddress}
+              isValid={emailValid}
+              onTextChanged={s => {
+                setEmailAddress(trim(s.toLowerCase()));
+                const valid = EmailValidator.validate(trim(s.toLowerCase()));
+                setEmailValid(s === '' || valid);
+              }}
               keyboardType={'email-address'}
             />
             <PantryPhoneInput
               label={t('label_mobile_number')}
+              validation={t('validation_invalid_phone')}
               prefix={defaultCountryCallingCode}
-              value={mobileNumber}
-              onTextChanged={setMobileNumber}
+              value={phoneNumber}
+              isValid={phoneValid}
+              onTextChanged={s => {
+                setPhoneNumber(s);
+                const valid = validPhone(trim(s), defaultCountryCode);
+                setPhoneValid(s === '' || valid);
+              }}
               keyboardType={'phone-pad'}
             />
             <PantryTextInput
               label={t('label_password')}
+              validation={t('validation_invalid_password')}
               value={password}
-              onTextChanged={setPassword}
+              isValid={passwordValid}
+              onTextChanged={s => {
+                setPassword(s);
+                setPasswordValid(s === '' || trim(s).length >= 8);
+              }}
               keyboardType={'default'}
               isPasswordField={true}
             />
-            <PantryButton label={t('label_sign_up')} onPress={validateInput} />
+            <PantryButton
+              label={t('label_sign_up')}
+              onPress={validateInput}
+              enabled={
+                nameValid &&
+                emailValid &&
+                phoneValid &&
+                passwordValid &&
+                fullName !== '' &&
+                emailAddress !== '' &&
+                phoneNumber !== '' &&
+                password !== ''
+              }
+            />
             <PantrySpacer horizontal={false} space={20} />
             <View style={styles.loginRow}>
               <Text style={styles.loginQuestion}>Have an account?</Text>
