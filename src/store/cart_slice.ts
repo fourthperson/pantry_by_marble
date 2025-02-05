@@ -17,66 +17,58 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
       const newItem: CartItem = action.payload;
-      const currentCart = state.items;
-      const found = currentCart.filter(
-        item => item.product.id === newItem.product.id,
-      );
-      if (found.length !== 0) {
+
+      const index = findItemIndex(newItem, state.items);
+      if (index !== -1) {
         return;
       }
-      // does not exist
-      // add
-      const newCart = [...currentCart, newItem];
-      const total = calculateTotal(newCart);
-      state.items = newCart;
-      state.total = total;
+
+      state.items = [...state.items, newItem];
+      state.total = calculateTotal(state.items);
     },
     removeFromCart: (state, action: PayloadAction<CartItem>) => {
-      const target: CartItem = action.payload;
-      let currentCart = [...state.items];
-      currentCart = currentCart.filter(
-        item => item.product.id !== target.product.id,
-      );
-      const total = calculateTotal(currentCart);
-      state.items = [...currentCart];
-      state.total = total;
+      const targetItem: CartItem = action.payload;
+
+      const index = findItemIndex(targetItem, state.items);
+      if (index === -1) {
+        return;
+      }
+
+      state.items.splice(index, 1);
+      state.total = calculateTotal(state.items);
     },
     increaseQuantity: (state, action: PayloadAction<CartItem>) => {
       const target: CartItem = action.payload;
-      let currentCart = state.items;
-      const targetIndex = currentCart.findIndex(
-        e => e.product.id === target.product.id,
-      );
-      if (targetIndex === -1) {
+
+      const index = findItemIndex(target, state.items);
+      if (index === -1) {
         return;
       }
-      currentCart[targetIndex] = {
-        product: target.product,
-        quantity: target.quantity + 1,
-      };
-      const total = calculateTotal(currentCart);
-      state.items = [...currentCart];
-      state.total = total;
+
+      state.items[index].quantity = target.quantity + 1;
+      state.total = calculateTotal(state.items);
     },
     subtractQuantity: (state, action: PayloadAction<CartItem>) => {
-      const target = action.payload;
-      let currentCart = state.items;
-      const targetIndex = currentCart.findIndex(
-        e => e.product.id === target.product.id,
-      );
-      if (targetIndex === -1) {
+      const target: CartItem = action.payload;
+
+      if (target.quantity === 1) {
         return;
       }
-      currentCart[targetIndex] = {
-        product: target.product,
-        quantity: target.quantity - 1,
-      };
-      const total = calculateTotal(currentCart);
-      state.items = [...currentCart];
-      state.total = total;
+
+      const index = findItemIndex(target, state.items);
+      if (index === -1) {
+        return;
+      }
+
+      state.items[index].quantity = target.quantity - 1;
+      state.total = calculateTotal(state.items);
     },
   },
 });
+
+function findItemIndex(item: CartItem, cart: Array<CartItem>): number {
+  return cart.findIndex(e => e.product.id === item.product.id);
+}
 
 function calculateTotal(itemsArray: Array<CartItem>): number {
   let total: number = 0;
