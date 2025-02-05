@@ -19,7 +19,7 @@ import FavouriteSvg from '../../assets/images/favourite.svg';
 import SearchSvg from '../../assets/images/search.svg';
 import CartSvg from '../../assets/images/cart.svg';
 import ProfileSvg from '../../assets/images/profile.svg';
-import {numberOfProducts} from '../config/constants.ts';
+import {numberOfProducts, productsPerPage} from '../config/constants.ts';
 import {useAppSelector} from '../store/store.ts';
 
 export const routeSplash = 'splash';
@@ -100,7 +100,12 @@ const SearchIcon = (props: {
 };
 
 const ProductsScreen = () => {
-  return <Products productCount={numberOfProducts} />;
+  return (
+    <Products
+      productCount={numberOfProducts}
+      productsPerPage={productsPerPage}
+    />
+  );
 };
 
 const Home = (): React.JSX.Element => {

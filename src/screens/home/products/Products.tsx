@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
+  FlatList,
   Platform,
   StyleSheet,
   Text,
@@ -28,8 +29,12 @@ import {filterProducts, loadProducts} from '../../../store/product_slice.ts';
 import {ColumnItem} from '../../../components/ColumnItem.tsx';
 import {FlashList} from '@shopify/flash-list';
 import CategoryFilter from '../../../components/CategoryFilter.tsx';
+import PantryPagination from '../../../components/PantryPagination.tsx';
 
-const Products = (props: {productCount: number}): React.JSX.Element => {
+const Products = (props: {
+  productCount: number;
+  productsPerPage: number;
+}): React.JSX.Element => {
   const navigation = useNavigation();
 
   const dispatch = useAppDispatch();
@@ -47,13 +52,32 @@ const Products = (props: {productCount: number}): React.JSX.Element => {
     categoryAll,
   ]);
 
+  const totalPages = Math.ceil(products.length / props.productsPerPage);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [productList, setProductList] = useState<Array<PantryProduct>>([]);
+
+  const flatListRef = useRef<FlatList<PantryProduct>>();
+
   useEffect(() => {
     dispatch(loadProducts(props.productCount));
   }, [dispatch, props.productCount]);
 
   useEffect(() => {
     dispatch(filterProducts(selectedCategories));
+    setCurrentPage(1);
   }, [dispatch, selectedCategories]);
+
+  useEffect(() => {
+    const startIndex: number =
+      currentPage === 1 ? 0 : (currentPage - 1) * props.productsPerPage;
+    const endIndex: number =
+      currentPage === totalPages
+        ? products.length
+        : startIndex + props.productsPerPage;
+    setProductList([...products.slice(startIndex, endIndex)]);
+    flatListRef.current?.scrollToOffset({animated: true, offset: 0});
+  }, [currentPage, products, props.productsPerPage, totalPages]);
 
   return (
     <View style={baseStyle.bgContainer}>
@@ -71,7 +95,7 @@ const Products = (props: {productCount: number}): React.JSX.Element => {
           <Text style={styles.titleText}>{t('title_meat')}</Text>
           <PantrySpacer horizontal={false} space={10} />
           <PantryBar />
-          <PantrySpacer horizontal={false} space={20} />
+          <PantrySpacer horizontal={false} space={10} />
         </View>
         {isLoading ? (
           <View style={styles.loaderContainer}>
@@ -90,21 +114,30 @@ const Products = (props: {productCount: number}): React.JSX.Element => {
               {t('based_on_your_selection')}
             </Text>
             <Text style={styles.productsTitle}>{t('title_our_products')}</Text>
+            {
+              <PantryPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            }
             <PantrySpacer horizontal={false} space={20} />
             <View style={styles.gridContainer}>
-              <FlashList
-                data={products}
-                estimatedItemSize={245}
-                numColumns={2}
-                renderItem={({index, item}) => {
-                  return (
-                    <ColumnItem index={index} numColumns={2}>
-                      <PantryProductListItem product={item} />
-                    </ColumnItem>
-                  );
-                }}
-                contentContainerStyle={styles.flatListBottom}
-              />
+              {productList.length > 0 && (
+                <FlashList
+                  ref={flatListRef}
+                  data={productList}
+                  estimatedItemSize={245}
+                  numColumns={2}
+                  renderItem={({index, item}) => {
+                    return (
+                      <ColumnItem index={index} numColumns={2}>
+                        <PantryProductListItem product={item} />
+                      </ColumnItem>
+                    );
+                  }}
+                />
+              )}
             </View>
           </View>
         )}
@@ -160,7 +193,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
   },
-  flatListBottom: {},
   loaderContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -170,10 +202,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'row',
     paddingHorizontal: 24,
-    paddingBottom: Platform.OS === 'ios' ? 375 : 425,
-  },
-  categoriesGroup: {
-    backgroundColor: 'transparent',
+    paddingBottom: Platform.OS === 'ios' ? 425 : 475,
   },
 });
 
