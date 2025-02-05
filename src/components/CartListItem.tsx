@@ -18,6 +18,7 @@ import {
 import {useTranslation} from 'react-i18next';
 import CartQuantityButton from './CartQuantityButton.tsx';
 import {useAppDispatch} from '../store/store.ts';
+import FastImage from 'react-native-fast-image';
 
 const CartListItem = (props: {item: CartItem}): React.JSX.Element => {
   const dispatch = useAppDispatch();
@@ -36,9 +37,10 @@ const CartListItem = (props: {item: CartItem}): React.JSX.Element => {
 
   return (
     <View style={[styles.container]}>
-      <Image
+      <FastImage
         style={styles.image}
-        source={imageMapper(props.item.product.image)}
+        source={Image.resolveAssetSource(imageMapper(props.item.product.image))}
+        resizeMode={FastImage.resizeMode.cover}
       />
       <PantrySpacer horizontal={true} space={20} />
       <View style={styles.detailGroup}>

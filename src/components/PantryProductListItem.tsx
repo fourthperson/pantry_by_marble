@@ -12,6 +12,7 @@ import {alertMsg, formatPrice, imageMapper} from '../util/util.ts';
 import {CartItem, PantryProduct} from '../types/types.ts';
 import {useAppDispatch} from '../store/store.ts';
 import {addToCart} from '../store/cart_slice.ts';
+import FastImage from 'react-native-fast-image';
 
 const PantryProductListItem = (props: {
   product: PantryProduct;
@@ -30,7 +31,11 @@ const PantryProductListItem = (props: {
 
   return (
     <View>
-      <Image style={styles.image} source={imageMapper(props.product.image)} />
+      <FastImage
+        style={styles.image}
+        source={Image.resolveAssetSource(imageMapper(props.product.image))}
+        resizeMode={FastImage.resizeMode.cover}
+      />
       <PantrySpacer horizontal={false} space={20} />
       <Text style={styles.nameText}>{props.product.name}</Text>
       <PantrySpacer horizontal={false} space={10} />
