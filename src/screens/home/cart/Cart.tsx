@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
   baseStyle,
@@ -17,7 +17,6 @@ import {useNavigation} from '@react-navigation/native';
 import PantryBar from '../../../components/PantryBar.tsx';
 import PantryButton from '../../../components/PantryButton.tsx';
 import PromoCodeComponent from '../../../components/PromoCodeComponent.tsx';
-import {CartItem} from '../../../types/types.ts';
 import CartListItem from '../../../components/CartListItem.tsx';
 import {formatPrice} from '../../../util/util.ts';
 import CartSvg from '../../../../assets/images/cart.svg';
@@ -32,18 +31,18 @@ const Cart = (): React.JSX.Element => {
 
   const cart = useAppSelector(state => state.cart);
 
-  const cartList = useMemo(() => {
-    if (!Array.isArray(cart.items)) {
-      return [];
-    }
-    const items: Array<CartItem> = [];
-    for (let i = 0; i < cart.items.length; i++) {
-      items.push(cart.items[i] as CartItem);
-    }
-    return items;
-  }, [cart]);
+  // const cart.items = useMemo(() => {
+  //   if (!Array.isArray(cart.items)) {
+  //     return [];
+  //   }
+  //   const items: Array<CartItem> = [];
+  //   for (let i = 0; i < cart.items.length; i++) {
+  //     items.push(cart.items[i] as CartItem);
+  //   }
+  //   return items;
+  // }, [cart]);
 
-  const deliveryFee = cartList.length === 0 ? 0 : 28;
+  const deliveryFee = cart.items.length === 0 ? 0 : 28;
 
   // const filListCallback = useCallback(() => {
   //   if (!Array.isArray(cart.items)) {
@@ -74,17 +73,17 @@ const Cart = (): React.JSX.Element => {
           <PantrySpacer horizontal={false} space={10} />
         </View>
         <View style={[baseStyle.fillSpace]}>
-          {cartList.length > 0 && (
+          {cart.items.length > 0 && (
             <FlashList
-              data={cartList}
+              data={cart.items}
               estimatedItemSize={118}
               renderItem={({item}) => <CartListItem item={item} />}
               contentContainerStyle={styles.flatlistBottom}
             />
           )}
-          {cartList.length === 0 && (
+          {cart.items.length === 0 && (
             <View style={styles.emptyGroup}>
-              <CartSvg size={30} color={primaryColor} />
+              <CartSvg height={30} width={30} color={primaryColor} />
               <Text style={styles.emptyText}>{t('cart_empty')}</Text>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Text style={styles.backLinkText}>{t('add_items')}</Text>
@@ -92,7 +91,7 @@ const Cart = (): React.JSX.Element => {
             </View>
           )}
         </View>
-        {cartList.length > 0 && (
+        {cart.items.length > 0 && (
           <View style={styles.bottomGroup}>
             <View style={styles.promoGroup}>
               <PromoCodeComponent />

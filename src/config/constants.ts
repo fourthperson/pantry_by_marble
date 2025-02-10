@@ -1,4 +1,4 @@
-export const numberOfProducts: number = 65;
+export const numberOfProducts: number = 105;
 export const productsPerPage: number = 10;
 export const productCategories: Array<string> = [
   'All',
