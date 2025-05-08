@@ -16,7 +16,7 @@
     "@reduxjs/toolkit": "^2.5.0",
     "@shopify/flash-list": "^1.7.3",
     "email-validator": "^2.0.4",
-    "i18next": "^24.2.1",
+    "i18next": "^25.1.2",
     "libphonenumber-js": "^1.11.18",
     "react": "18.3.1",
     "react-i18next": "^15.4.0",
