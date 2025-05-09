@@ -2283,6 +2283,11 @@
     redux-thunk "^3.1.0"
     reselect "^5.1.0"
 
+"@rnx-kit/align-deps@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/align-deps/-/align-deps-3.0.5.tgz#a21513b285bb45f59103801159b95e7a62829cd8"
+  integrity sha512-2OYv9ZODKAusVRLw9vwH9CM2GvDuCgow9hGrueRiyodKGbxl5q/+7EfrDiM2fRB1fZ7sRXgzhCjgGBTPoWVY8g==
+
 "@shopify/flash-list@^1.8.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@shopify/flash-list/-/flash-list-1.8.0.tgz#d271d3ca49acf9f53812594f0c4d24a994eb95e5"
