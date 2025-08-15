@@ -20,7 +20,7 @@
     "libphonenumber-js": "^1.12.8",
     "react": "19.0.0",
     "react-i18next": "^15.5.1",
-    "react-native": "0.79.0",
+    "react-native": "0.79.6",
     "react-native-fast-image": "^8.6.3",
     "react-native-flash-message": "^0.4.2",
     "react-native-gesture-handler": "^2.25.0",
